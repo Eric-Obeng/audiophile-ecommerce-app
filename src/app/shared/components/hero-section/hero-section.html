@@ -9,12 +9,17 @@
     <a class="cta-btn sub-title"> See Product </a>
   </div>
   <div class="hero-image">
-    <img
-      ngSrc="assets/shared/mobile/hero-headphone.png"
-      alt="hero headphone"
-      class="headphone-image"
-      fill="true"
-      priority
-    />
+    <picture>
+      <source media="(min-width: 1440px)" srcset="assets/home/desktop/image-hero.jpg" />
+      <source media="(min-width: 1024px)" srcset="assets/home/desktop/image-hero.jpg" />
+      <source media="(min-width: 768px)" srcset="assets/home/tablet/image-header.jpg" />
+      <img
+        ngSrc="assets/home/mobile/image-header.jpg"
+        alt="hero headphone"
+        class="headphone-image"
+        fill="true"
+        priority
+      />
+    </picture>
   </div>
 </section>

@@ -33,6 +33,7 @@
       letter-spacing: 1.29px
       color: $white
       font-size: 3.6rem
+      text-transform: uppercase
 
     .hero-description
       color: $gray
@@ -61,26 +62,14 @@
         max-width: 34.9rem
 
   .hero-image
-    width: 100%
-    top: 0
-    left: 0
-    height: 90%
-    position: absolute
-    z-index: 0
+    display: relative
 
-    @include mq(desktop)
-      position: relative
-      width: 50%
-      margin-left: auto
+    picture
+      display: block
 
-    .headphone-image
-      object-fit: contain
-      transform: scale(1.6)
-
-
-      @include mq(tablet)
-        transform: scale(1.2)
-
-      @include mq(desktop)
-        transform: scale(2)
-
+      .headphone-image
+        max-width: 100%
+        height: auto
+        object-fit: cover
+        object-position: center
+        position: relative
