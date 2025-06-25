@@ -1,0 +1,85 @@
+@use '../../../../styleSheet/_Variables' as *
+@use '../../../../styleSheet/_breakpoints' as *
+@use '../../../../styleSheet/_typography' as *
+@use '../../../../styleSheet/_mixin' as *
+
+.hero
+  position: relative
+  width: 100%
+  height: calc(100dvh - 10rem)
+  background-color: $black
+  @include flex-container(column, center, center)
+  overflow: hidden
+
+  @include mq(desktop)
+    padding: 12.8rem 16.5rem 15.8rem
+    flex-direction: row
+    text-align: left
+    align-items: center
+    justify-content: space-between
+
+  .hero-content
+    @include flex-container(column, center, center, nowrap, 1.6rem)
+    max-width: 32.8rem
+    z-index: 1
+    text-align: center
+
+
+    .overline
+      text-transform: uppercase
+      color: $gray
+
+    .hero-title
+      letter-spacing: 1.29px
+      color: $white
+      font-size: 3.6rem
+
+    .hero-description
+      color: $gray
+
+    .cta-btn
+      background-color: $primary-orange
+      color: $white
+      padding: 1.5rem 3rem
+      text-transform: uppercase
+
+      &:hover
+        background-color: $primary-peach
+        transition: background-color 0.3s ease-in-out
+
+    @include mq(desktop)
+      text-align: left
+      align-items: flex-start
+      max-width: 37.9rem
+
+      .hero-title
+        font-size: 5.6rem
+        letter-spacing: 2px
+
+      .hero-description
+        max-width: 34.9rem
+
+  .hero-image
+    width: 100%
+    top: 0
+    left: 0
+    height: 90%
+    position: absolute
+    z-index: 0
+
+    @include mq(desktop)
+      position: relative
+      width: 50%
+      margin-left: auto
+
+    .headphone-image
+      object-fit: contain
+      transform: scale(1.6)
+
+
+      @include mq(tablet)
+        transform: scale(1.2)
+
+      @include mq(desktop)
+        transform: scale(1.8)
+
