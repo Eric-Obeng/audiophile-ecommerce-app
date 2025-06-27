@@ -12,7 +12,6 @@
     overflow: hidden
 
   .categories
-    padding: 4rem 2.4rem
     width: 100%
     min-height: 50px
 
@@ -33,6 +32,7 @@
 
 
     .zx9
+      position: relative
       background-color: $primary-orange
       background-image: url(/assets/home/desktop/pattern-circles.svg)
       background-repeat: no-repeat
@@ -41,13 +41,20 @@
       @include flex-container(column, center, center, nowrap, 3.2rem)
       padding: 5.2rem
 
+      @include mq($key: desktop)
+        flex-direction: row
+        height: 56rem
+
+      @include mq($key: large)
+        justify-content: space-evenly
+
     .card
       border-radius: 1rem
       overflow: hidden
 
       picture
         display: block
-        width: 100%
+        // width: 100%
 
         img
           width: 100%
@@ -58,6 +65,12 @@
           max-width: 19.721rem
           margin: 0 auto
 
+          @include mq($key: desktop)
+            max-width: 38.1rem
+            margin: 0
+            padding-top: 24rem
+
+
       .content
         .button-link
           padding: 1.5rem 3rem
@@ -66,14 +79,23 @@
 
       .zx9-content
         @include flex-container(column, center, center, nowrap, 2.4rem)
-
         max-width: 28rem
         text-align: center
         gap: 2.4rem
 
+        @include mq($key: desktop)
+          max-width: 30rem
+          text-align: left
+          align-items: flex-start
+
         .h3-manrope-bold
           font-size: 3.6rem
           color: $white
+
+          @include mq($key: desktop)
+            font-size: 4.8rem
+            text-align: left
+
 
         .body-medium
           opacity: 0.75
@@ -159,14 +181,18 @@
   .col-3
     @include flex-container(column,center,center, nowrap, 4rem)
     padding: 2.4rem
-    margin: 20rem 0
+    margin: 12rem 0
 
     @include mq($key: desktop)
       flex-direction: row-reverse
       padding: 1rem 16.5rem
+      margin: 15rem 0
+
 
     @include mq($key: large)
       justify-content: space-between
+      margin: 20rem 0
+
 
     picture
       display: block
