@@ -1,0 +1,82 @@
+@use  '../../../../styleSheet/_Variables' as *
+@use  '../../../../styleSheet/_mixin' as *
+@use  '../../../../styleSheet/_typography' as *
+@use  '../../../../styleSheet/_breakpoints' as *
+
+.footer-container
+  @include flex-container(
+    column,
+    center,
+    flex-start,
+    nowrap,
+    4.8rem
+  )
+  background: $black
+  color: $white
+  padding: 0 2.4rem 4.8rem 2.4rem
+
+  @include mq($key: tablet)
+    align-items: flex-start
+    padding: 0 3.9rem 4.8rem 3.9rem
+
+  @include mq($key: desktop)
+    padding: 0 16.5rem 4.8rem 16.5rem
+
+  span
+    background: $primary-orange
+    width: 10.1rem
+    height: 0.4rem
+
+  .col-1
+    @include flex-container(column, center, center, nowrap, 4rem)
+    width: 100%
+
+    @include mq($key: tablet)
+      align-items: flex-start
+
+
+    @include mq($key: desktop)
+      flex-direction: row
+      align-items: center
+      justify-content: space-between
+
+
+    .navigation
+      display: block
+
+      .nav-list
+        @include flex-container(column, center, space-between, nowrap, 1.6rem)
+
+        @include mq($key: tablet)
+          flex-direction: row
+
+
+        li
+          list-style: none
+          cursor: pointer
+
+          &:hover
+            color: $primary-orange
+
+  p
+    opacity: 0.5
+    text-align: center
+
+    @include mq($key: tablet)
+      text-align: left
+
+
+  .col-2
+    @include flex-container(column, center, center, nowrap, 4rem)
+    width: 100%
+
+    @include mq($key: tablet)
+      flex-direction: row
+      justify-content: space-between
+
+    .socials
+      @include flex-container(row, center, center, nowrap, 1.6rem)
+      gap: 1.6rem
+
+    @include mq($key: tablet)
+      align-items: flex-start
