@@ -10,18 +10,54 @@
     </button>
 
     <!-- Logo -->
-    <a href="/" class="logo">
+    <a [routerLink]="['/']" class="logo">
       <img src="assets/logo.svg" alt="Logo" class="logo-image" />
     </a>
 
     <!-- nav list -->
     <nav class="navigation">
       <ul class="nav-list">
-        <li><a class="nav-link sub-title">HOME</a></li>
-        <li><a class="nav-link sub-title">HEADPHONES</a></li>
-        <li><a class="nav-link sub-title">SPEAKERS</a></li>
-        <li><a class="nav-link sub-title">EARPHONES</a></li>
-        <li><a class="nav-link sub-title">LOGIN</a></li>
+        <li>
+          <a
+            [routerLink]="['']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}"
+            class="nav-link sub-title"
+            >HOME</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/category', 'headphones']"
+            routerLinkActive="active"
+            class="nav-link sub-title"
+            >HEADPHONES</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/category', 'speakers']"
+            routerLinkActive="active"
+            class="nav-link sub-title"
+            >SPEAKERS</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/category', 'earphones']"
+            routerLinkActive="active"
+            class="nav-link sub-title"
+            >EARPHONES</a
+          >
+        </li>
+        <li>
+          <a
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}"
+            class="nav-link sub-title"
+            >LOGIN</a
+          >
+        </li>
       </ul>
     </nav>
 
