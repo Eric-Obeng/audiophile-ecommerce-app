@@ -1,0 +1,9 @@
+<section class="category-menu-container">
+  @for (category of categories; track category.name) {
+  <app-category-card
+    [categoryName]="category.name"
+    [categoryImage]="category.imageUrl"
+    [categoryLink]="category.link"
+  ></app-category-card>
+  }
+</section>
