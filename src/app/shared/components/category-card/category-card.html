@@ -1,0 +1,21 @@
+<div class="category-card">
+  <div class="image-div">
+    <img
+      [src]="categoryImage()"
+      [alt]="categoryName()"
+      class="category-image"
+      fill
+    />
+  </div>
+  <div class="category-content">
+    <h2 class="category-name body-medium">{{ categoryName() }}</h2>
+    <a class="category-link sub-title">
+      SHOP
+      <img
+        src="assets/shared/desktop/icon-arrow-right.svg"
+        alt="right arrow"
+        class="arrow-icon"
+      />
+    </a>
+  </div>
+</div>
