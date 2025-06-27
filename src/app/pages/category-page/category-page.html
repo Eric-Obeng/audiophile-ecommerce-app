@@ -1,1 +1,24 @@
-<p>category-page works!</p>
+<div class="category-container">
+  <div class="category-content">
+    <div class="top">
+      <h2 class="h4-manrope-bold">{{formattedCategoryName().toUpperCase()}}</h2>
+    </div>
+    @if (loading()) {
+    <app-loading-spinner></app-loading-spinner>
+    } @else if (error()) {
+    <h1 class="error">{{error()}}</h1>
+    } @else if (products().length === 0) {
+    <div class="empty">No products found in this category</div>
+    } @else {
+    <div class="product-list">
+      @for (product of products(); track product.id) {
+      <app-product-card [product]="product"></app-product-card>
+      }
+    </div>
+    }
+  </div>
+
+  <app-category-menu></app-category-menu>
+  <app-info></app-info>
+  <app-footer></app-footer>
+</div>
