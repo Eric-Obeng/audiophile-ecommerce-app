@@ -1,0 +1,218 @@
+@use '../../../styleSheet/_breakpoints' as *
+@use '../../../styleSheet/_mixin' as *
+@use '../../../styleSheet/_Variables' as *
+
+.home-container
+  width: 100%
+
+  .hero-wrapper
+    width: 100%
+    display: block
+    min-height: 50px
+    overflow: hidden
+
+  .categories
+    padding: 4rem 2.4rem
+    width: 100%
+    min-height: 50px
+
+    @include mq(tablet )
+      padding: 9.6rem 3.9rem
+
+    @include mq($key: desktop)
+      padding: 16.5rem 15.5rem
+
+
+  .col-2
+    @include flex-container(column, _, center, nowrap, 2.4rem)
+    padding: 2.4rem
+
+    @include mq($key: desktop)
+      padding: 1rem 16.5rem
+
+
+
+    .zx9
+      background-color: $primary-orange
+      background-image: url(/assets/home/desktop/pattern-circles.svg)
+      background-repeat: no-repeat
+      background-position: center
+      background-size: contain
+      @include flex-container(column, center, center, nowrap, 3.2rem)
+      padding: 5.2rem
+
+    .card
+      border-radius: 1rem
+      overflow: hidden
+
+      picture
+        display: block
+        width: 100%
+
+        img
+          width: 100%
+          height: auto
+          display: block
+
+        img.zx9-speaker
+          max-width: 19.721rem
+          margin: 0 auto
+
+      .content
+        .button-link
+          padding: 1.5rem 3rem
+          text-decoration: none
+
+
+      .zx9-content
+        @include flex-container(column, center, center, nowrap, 2.4rem)
+
+        max-width: 28rem
+        text-align: center
+        gap: 2.4rem
+
+        .h3-manrope-bold
+          font-size: 3.6rem
+          color: $white
+
+        .body-medium
+          opacity: 0.75
+          color: $white
+
+        .button-link
+          background: $black
+          color: $white
+
+          &:hover
+            background: $black-hover
+            transition: background 0.3s ease-in-out
+
+    .zx7
+      position: relative
+
+      picture
+        display: block
+        width: 100%
+
+        img
+          width: 100%
+          height: auto
+          display: block
+
+      .zx7-content
+        @include flex-container(column, _, center, nowrap, 3.2rem)
+        position: absolute
+        top: 35%
+        left: 2.4rem
+        transform: translateY(-50%, 50%)
+
+        .button-link
+          width: 17rem
+          border: 1px solid $black
+          color: $black
+
+          &:hover
+            background: $black
+            color: $white
+            transition: background 0.3s ease-in-out, color 0.3s ease-in-out
+
+    .yx1
+      @include flex-container(column, _, center, nowrap, 2.4rem)
+
+      @include mq(tablet)
+        flex-direction: row
+        gap: 1.1rem
+
+
+      picture
+        display: block
+        width: 100%
+
+        @include mq($key: tablet)
+          flex: 1
+
+        img
+          width: 100%
+          height: auto
+          display: block
+          border-radius: 1rem
+
+      .yx1-content
+          @include flex-container(column, _, center, nowrap, 3.2rem)
+          border-radius: 1rem
+          background: $light-grey
+          padding: 4.1rem 2.4rem
+
+          @include mq($key: tablet)
+            width: 50%
+
+          .button-link
+            border: 1px solid $black
+            color: $black
+            width: 17rem
+
+            &:hover
+              background: $black
+              color: $white
+              transition: background 0.3s ease-in-out, color 0.3s ease-in-out
+
+  .col-3
+    @include flex-container(column,center,center, nowrap, 4rem)
+    padding: 2.4rem
+    margin: 20rem 0
+
+    @include mq($key: desktop)
+      flex-direction: row-reverse
+      padding: 1rem 16.5rem
+
+    @include mq($key: large)
+      justify-content: space-between
+
+    picture
+      display: block
+      width: 100%
+      border-radius: 1rem
+      overflow: hidden
+
+      @include mq(large)
+        width: 84rem
+
+
+      img
+        width: 100%
+        height: auto
+        display: block
+
+    .about-content
+      @include flex-container(column,center,center, nowrap, 3.2rem)
+
+      @include mq($key: tablet)
+        max-width: 57.3rem
+
+      @include mq($key: desktop)
+        max-width: 44.5rem
+      @include mq($key: large)
+        max-width: 60rem
+
+      .h4-manrope-bold
+        text-align: center
+        text-transform: uppercase
+
+        @include mq(large)
+          font-size: 4rem
+          letter-spacing: 0.2rem
+
+        .orange
+          color: $primary-orange
+
+      .body-medium
+        text-align: center
+        opacity: 0.5
+        color: $black
+
+        @include mq(large)
+          font-size: 3rem
+          line-height: 1.3
+
+
+
