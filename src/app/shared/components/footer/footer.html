@@ -4,10 +4,39 @@
     <img src="assets/logo.svg" alt="logo" />
     <nav class="navigation">
       <ul class="nav-list">
-        <li><a class="nav-link sub-title">HOME</a></li>
-        <li><a class="nav-link sub-title">HEADPHONES</a></li>
-        <li><a class="nav-link sub-title">SPEAKERS</a></li>
-        <li><a class="nav-link sub-title">EARPHONES</a></li>
+        <li>
+          <a
+            [routerLink]="['']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}"
+            class="nav-link sub-title"
+            >HOME</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/category', 'headphones']"
+            routerLinkActive="active"
+            class="nav-link sub-title"
+            >HEADPHONES</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/category', 'speakers']"
+            routerLinkActive="active"
+            class="nav-link sub-title"
+            >SPEAKERS</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/category', 'earphones']"
+            routerLinkActive="active"
+            class="nav-link sub-title"
+            >EARPHONES</a
+          >
+        </li>
       </ul>
     </nav>
   </div>
@@ -22,9 +51,9 @@
     <p>Copyright 2021. All Rights Reserved</p>
 
     <div class="socials">
-      <img src="assets/shared/desktop/icon-facebook.svg" alt="facebook logo">
-      <img src="assets/shared/desktop/icon-twitter.svg" alt="facebook logo">
-      <img src="assets/shared/desktop/icon-instagram.svg" alt="facebook logo">
+      <img src="assets/shared/desktop/icon-facebook.svg" alt="facebook logo" />
+      <img src="assets/shared/desktop/icon-twitter.svg" alt="facebook logo" />
+      <img src="assets/shared/desktop/icon-instagram.svg" alt="facebook logo" />
     </div>
   </div>
 </footer>

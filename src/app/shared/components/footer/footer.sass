@@ -55,8 +55,12 @@
           list-style: none
           cursor: pointer
 
-          &:hover
-            color: $primary-orange
+          .nav-link
+            text-decoration: none
+            color: $white
+
+            &:hover, &.active
+              color: $primary-orange
 
   p
     opacity: 0.5
