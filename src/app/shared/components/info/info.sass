@@ -1,0 +1,66 @@
+@use  '../../../../styleSheet/_Variables' as *
+@use  '../../../../styleSheet/_mixin' as *
+@use  '../../../../styleSheet/_breakpoints' as *
+
+.col-3
+  @include flex-container(column,center,center, nowrap, 4rem)
+  padding: 2.4rem
+  margin: 12rem 0
+
+  @include mq($key: desktop)
+    flex-direction: row-reverse
+    padding: 1rem 16.5rem
+    margin: 15rem 0
+
+
+  @include mq($key: large)
+    justify-content: space-between
+    margin: 20rem 0
+
+
+  picture
+    display: block
+    width: 100%
+    border-radius: 1rem
+    overflow: hidden
+
+    @include mq(large)
+      width: 84rem
+
+
+    img
+      width: 100%
+      height: auto
+      display: block
+
+  .about-content
+    @include flex-container(column,center,center, nowrap, 3.2rem)
+
+    @include mq($key: tablet)
+      max-width: 57.3rem
+
+    @include mq($key: desktop)
+      max-width: 44.5rem
+    @include mq($key: large)
+      max-width: 60rem
+
+    .h4-manrope-bold
+      text-align: center
+      text-transform: uppercase
+
+      @include mq(large)
+        font-size: 4rem
+        letter-spacing: 0.2rem
+
+      .orange
+        color: $primary-orange
+
+    .body-medium
+      text-align: center
+      opacity: 0.5
+      color: $black
+
+      @include mq(large)
+        font-size: 2.5rem
+        line-height: 1.3
+
