@@ -1,6 +1,7 @@
-// Production environment - uses environment variables from hosting platform
+// Production environment - values will be replaced during build
+// DO NOT commit actual keys to version control
 export const environment = {
   production: true,
-  supabaseUrl: process.env['supabaseUrl'] ?? '',
-  supabaseKey: process.env['supabaseKey'] ?? '',
+  supabaseUrl: '${SUPABASE_URL}',
+  supabaseKey: '${SUPABASE_KEY}',
 };

@@ -47,6 +47,6 @@ Thumbs.db
 # Environment files
 .env
 /src/environments/environment.development.ts
-# But keep the templates
+# But keep the templates and production template
 !.env.template
 !src/environments/*.template.ts
