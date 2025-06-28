@@ -1,0 +1,16 @@
+@use '../../../../styleSheet/_mixin' as *
+@use '../../../../styleSheet/_breakpoints' as *
+
+.category-menu-container
+  @include flex-container(column, _, _, nowrap, 1.6rem)
+  padding: 4rem 2.4rem
+
+@include mq(tablet)
+  .category-menu-container
+    @include flex-container(row, flex-start, center, nowrap, 1rem)
+
+@include mq($key: desktop)
+  .category-menu-container
+    gap: 3rem
+
+

@@ -1,0 +1,81 @@
+@use '../../../../styleSheet/_mixin' as *
+@use '../../../../styleSheet/_Variables' as *
+@use '../../../../styleSheet/_typography' as *
+@use '../../../../styleSheet/_breakpoints' as *
+
+.product-card
+  @include flex-container(column, flex-start, center, nowrap, 3.2rem)
+  width: 100%
+
+  @include mq($key: tablet)
+    @include flex-container(column, center, center, nowrap, 5.2rem)
+    width: 100%
+
+
+  @include mq($key: desktop)
+    @include flex-container(row, space-between, center, nowrap, 12.5rem)
+
+    &:nth-child(even)
+      flex-direction: row-reverse
+
+  .product-image
+    width: 100%
+    border-radius: 0.8rem
+    overflow: hidden
+
+    @include mq($key: tablet)
+      width: 100%
+
+    @include mq($key: desktop)
+      width: 50%
+
+    img
+      width: 100%
+      height: auto
+      object-fit: cover
+      transition: transform 0.3s ease-in-out
+
+      &:hover
+        transform: scale(1.05)
+
+  .product-info
+    @include flex-container(column, center, flex-start, nowrap, 2.4rem)
+    width: 100%
+
+    @include mq($key: tablet)
+      align-items: center
+
+    @include mq($key: desktop)
+      width: 50%
+
+    .new-product
+      color: $primary-orange
+      text-transform: uppercase
+      letter-spacing: 1rem
+
+
+    h2
+      margin-top: 0
+
+      @include mq($key: tablet)
+        margin-top: 1.6rem
+
+    p
+      color: $black
+      opacity: 0.5
+      text-align: center
+
+
+    .see-product
+      display: inline-block
+      background-color: $primary-orange
+      color: $white
+      text-decoration: none
+      padding: 1.5rem 3rem
+      text-transform: uppercase
+      font-weight: bold
+      letter-spacing: 0.1rem
+      transition: background-color 0.3s ease
+
+      &:hover
+        background-color: $primary-peach

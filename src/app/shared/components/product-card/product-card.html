@@ -1,0 +1,31 @@
+<div class="product-card">
+  <div class="product-image">
+    <picture>
+      <source
+        media="(min-width: 1024px)"
+        [srcset]="findCategoryImage(product(), 'desktop')"
+      />
+      <source
+        media="(min-width: 768px)"
+        [srcset]="findCategoryImage(product(), 'tablet')"
+      />
+      <img
+        [ngSrc]="findCategoryImage(product(), 'mobile')"
+        [alt]="product().name"
+        width="540"
+        height="500"
+        priority
+      />
+    </picture>
+  </div>
+  <div class="product-info">
+    @if (product().new) {
+    <span class="new-product">New Product</span>
+    }
+    <h2>{{ product().name }}</h2>
+    <p>{{ product().description }}</p>
+    <a [routerLink]="['/product', product().slug]" class="see-product"
+      >See Product</a
+    >
+  </div>
+</div>

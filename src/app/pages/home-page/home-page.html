@@ -1,1 +1,104 @@
-<p>home-page works!</p>
+<div class="home-container">
+  <!-- Apply animation with no delay for hero section -->
+  <div
+    class="hero-wrapper"
+    appScrollAnimation="fade-in"
+    [delay]="0"
+    [threshold]="0.1"
+  >
+    <app-hero-section></app-hero-section>
+  </div>
+
+  <!-- Apply delayed animation for categories -->
+  <div
+    class="categories"
+    appScrollAnimation="slide-up"
+    [delay]="200"
+    [threshold]="0.1"
+  >
+    <app-category-menu></app-category-menu>
+  </div>
+
+  <div class="col-2">
+    <div class="zx9 card">
+      <picture>
+        <source
+          media="(min-width: 1440px)"
+          srcset="assets/home/desktop/image-speaker-zx9.png"
+        />
+        <source
+          media="(min-width: 1024px)"
+          srcset="assets/home/desktop/image-speaker-zx9.png"
+        />
+        <source
+          media="(min-width: 728px)"
+          srcset="assets/home/tablet/image-speaker-zx9.png"
+        />
+        <img
+          src="assets/home/mobile/image-speaker-zx9.png"
+          alt="zx9 speaker"
+          class="zx9-speaker"
+        />
+      </picture>
+      <div class="zx9-content content">
+        <h3 class="h3-manrope-bold">ZX9<br />SPEAKER</h3>
+        <p class="body-medium">
+          Upgrade to premium speakers that are phenomenally built to deliver
+          truly remarkable sound.
+        </p>
+
+        <a href="/products/zx9-speaker" class="button-link"> SEE PRODUCT </a>
+      </div>
+    </div>
+    <div class="zx7 card">
+      <picture>
+        <source
+          media="(min-width: 1440px)"
+          srcset="assets/home/desktop/image-speaker-zx7.jpg"
+        />
+        <source
+          media="(min-width: 1024px)"
+          srcset="assets/home/desktop/image-speaker-zx7.jpg"
+        />
+        <source
+          media="(min-width: 728px)"
+          srcset="assets/home/tablet/image-speaker-zx7.jpg"
+        />
+        <img src="assets/home/mobile/image-speaker-zx7.jpg" alt="zx9 speaker" />
+      </picture>
+      <div class="zx7-content content">
+        <h3 class="h3-manrope-bold">ZX7 SPEAKER</h3>
+        <a href="/products/zx9-speaker" class="button-link"> SEE PRODUCT </a>
+      </div>
+    </div>
+    <div class="yx1 card">
+      <picture>
+        <source
+          media="(min-width: 1440px)"
+          srcset="assets/home/desktop/image-earphones-yx1.jpg"
+        />
+        <source
+          media="(min-width: 1024px)"
+          srcset="assets/home/desktop/image-earphones-yx1.jpg"
+        />
+        <source
+          media="(min-width: 728px)"
+          srcset="assets/home/tablet/image-earphones-yx1.jpg"
+        />
+        <img
+          src="assets/home/mobile/image-earphones-yx1.jpg"
+          alt="zx9 speaker"
+        />
+      </picture>
+      <div class="yx1-content content">
+        <h3 class="h3-manrope-bold">YX1 EARPHONES</h3>
+
+        <a href="/products/zx9-speaker" class="button-link"> SEE PRODUCT </a>
+      </div>
+    </div>
+  </div>
+
+  <app-info></app-info>
+
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,50 @@
+@use '../../../../styleSheet/_mixin' as *
+@use '../../../../styleSheet/_Variables' as *
+@use '../../../../styleSheet/_typography' as *
+@use '../../../../styleSheet/_breakpoints' as *
+
+.category-card
+  @include flex-container(column, center, flex-end, nowrap, 3.9rem)
+  height: 16.5rem
+  background: $light-grey
+  border-radius: 1rem
+  position: relative
+  margin-top: 5rem
+  padding: 2.2rem
+  width: 100%
+
+  @include mq($key: tablet)
+    width: 22.3rem
+
+  @include mq($key: desktop)
+    width: 22rem
+
+  @include mq($key: large)
+    width: 35rem
+    height: 22.4rem
+
+
+
+
+  .image-div
+    // width: 8rem
+    position: absolute
+    top: 0
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 15rem
+    height: 11rem
+
+    @include mq($key: desktop)
+      width: 18rem
+
+  .category-content
+    @include flex-container(column, center,flex-end, nowrap, 1.7rem)
+
+    .category-link
+      @include flex-container(row, center, center, nowrap, 1.4rem)
+      color: $gray
+      letter-spacing: 0.1rem
+      text-decoration: none
+
+
