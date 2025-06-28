@@ -34,7 +34,7 @@ export class ProductCard {
         return categoryImage.tablet_url;
       case 'desktop':
       default:
-        return categoryImage.mobile_url;
+        return categoryImage.desktop_url;
     }
   }
 }
