@@ -1,0 +1,43 @@
+<div class="form-field">
+  @if (type() === 'password') {
+  <div class="password-input-wrapper">
+    <input
+      [id]="id()"
+      [type]="showPassword() ? 'text' : 'password'"
+      [placeholder]="placeholder()"
+      [class.error]="hasError()"
+      [autocomplete]="autocomplete()"
+      [value]="value()"
+      (input)="onInput($event)"
+      (blur)="onTouched()"
+      [disabled]="disabled()"
+    />
+    <button
+      type="button"
+      class="password-toggle"
+      (click)="togglePasswordVisibility()"
+      [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+    >
+      @if (showPassword()) {
+      <span>👁️</span>
+      } @else {
+      <span>👁️‍🗨️</span>
+      }
+    </button>
+  </div>
+  } @else {
+  <input
+    [id]="id()"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [class.error]="hasError()"
+    [autocomplete]="autocomplete()"
+    [value]="value()"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
+    [disabled]="disabled()"
+  />
+  } @if (hasError() && errorMessage()) {
+  <span class="error-message">{{ errorMessage() }}</span>
+  }
+</div>
