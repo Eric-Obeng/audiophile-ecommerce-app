@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 /**
  * Custom validators for form validation
@@ -50,39 +50,5 @@ export class CustomValidators {
 
     const nameRegex = /^[a-zA-Z\s]+$/;
     return nameRegex.test(name) ? null : { invalidName: true };
-  }
-
-  /**
-   * Creates a minimum length validator with custom error key
-   */
-  static minLength(length: number): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!control.value || control.value.length >= length) {
-        return null;
-      }
-      return {
-        minLength: {
-          requiredLength: length,
-          actualLength: control.value.length,
-        },
-      };
-    };
-  }
-
-  /**
-   * Creates a maximum length validator with custom error key
-   */
-  static maxLength(length: number): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!control.value || control.value.length <= length) {
-        return null;
-      }
-      return {
-        maxLength: {
-          requiredLength: length,
-          actualLength: control.value.length,
-        },
-      };
-    };
   }
 }
