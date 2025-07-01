@@ -27,5 +27,3 @@ envContent = envContent.replace("${SUPABASE_KEY}", supabaseKey);
 
 // Write the file back
 fs.writeFileSync(envPath, envContent);
-
-console.log("✅ Environment variables injected into environment.ts");

@@ -27,13 +27,9 @@ const dataPath = path.resolve(__dirname, "../public/data.json");
  */
 async function migrateData() {
   try {
-    console.log("Starting data migration...");
-
     // Load and parse the data.json file
     const rawData = fs.readFileSync(dataPath, "utf-8");
     const products = JSON.parse(rawData);
-
-    console.log(`Found ${products.length} products to migrate`);
 
     // First pass: Create products
     for (const product of products) {
@@ -44,8 +40,6 @@ async function migrateData() {
     for (const product of products) {
       await migrateRelatedProducts(product);
     }
-
-    console.log("Migration completed successfully!");
   } catch (error) {
     console.error("Migration failed:", error.message);
     process.exit(1);
@@ -57,8 +51,6 @@ async function migrateData() {
  */
 async function migrateProduct(product) {
   try {
-    console.log(`Migrating product: ${product.name}`);
-
     // 1. Insert into products table
     const { data: productData, error: productError } = await supabase
       .from("products")
@@ -81,7 +73,6 @@ async function migrateProduct(product) {
       );
 
     const productId = productData.id;
-    console.log(`- Created product with ID: ${productId}`);
 
     // 2. Insert product images
     const { error: mainImageError } = await supabase
@@ -130,7 +121,6 @@ async function migrateProduct(product) {
       throw new Error(
         `Error inserting included items for ${product.name}: ${includesError.message}`
       );
-    console.log(`- Added ${includedItems.length} included items`);
 
     // 4. Insert gallery images
     const galleryImages = [
@@ -165,9 +155,6 @@ async function migrateProduct(product) {
       throw new Error(
         `Error inserting gallery for ${product.name}: ${galleryError.message}`
       );
-    console.log(`- Added gallery images`);
-
-    console.log(`Successfully migrated product ${product.name}`);
   } catch (error) {
     console.error(`Failed to migrate product ${product.name}:`, error.message);
     // Continue with other products even if one fails
@@ -179,8 +166,6 @@ async function migrateProduct(product) {
  */
 async function migrateRelatedProducts(product) {
   try {
-    console.log(`Migrating related products for: ${product.name}`);
-
     if (!product.others || !product.others.length) {
       console.log(`- No related products for ${product.name}`);
       return;
@@ -221,10 +206,6 @@ async function migrateRelatedProducts(product) {
         );
       }
     }
-
-    console.log(
-      `- Added ${product.others.length} related products for ${product.name}`
-    );
   } catch (error) {
     console.error(
       `Failed to migrate related products for ${product.name}:`,
