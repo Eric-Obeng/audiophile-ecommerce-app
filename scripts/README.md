@@ -16,6 +16,17 @@ Temporarily disables Row Level Security (RLS) to allow data migration.
 
 Sets up RLS policies for cart and checkout functionality.
 
+### 4. `setup-auth-schema.sql`
+
+Sets up the authentication schema for user profiles in Supabase.
+
+**What it creates:**
+
+- `profiles` table for storing user profile data
+- Row Level Security (RLS) policies for data protection
+- Automatic profile creation trigger when users sign up
+- Update timestamp functionality
+
 ## Prerequisites
 
 1. Create Supabase tables using the SQL script provided
@@ -55,6 +66,12 @@ Sets up RLS policies for cart and checkout functionality.
    - Go to your Supabase dashboard
    - Open SQL Editor
    - Run the `fix-rls-policies.sql` script
+
+2. To set up the authentication schema, run the `setup-auth-schema.sql` script:
+
+   - Go to your Supabase dashboard
+   - Open SQL Editor
+   - Run the `setup-auth-schema.sql` script
 
 ## Pushing to GitHub
 
