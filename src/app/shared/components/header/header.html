@@ -51,12 +51,21 @@
           >
         </li>
         <li>
+          @if (isAuthenticated()) {
+          <!-- Show Profile dropdown when authenticated -->
+
+          <a class="nav-link sub-title profile-toggle" type="button">
+            PROFILE
+          </a>
+
+          } @else {
           <a
             [routerLink]="['/auth', 'login']"
             routerLinkActive="active"
             class="nav-link sub-title"
             >LOGIN</a
           >
+          }
         </li>
       </ul>
     </nav>
