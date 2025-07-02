@@ -28,7 +28,7 @@ export class ProductService {
         .getClient()
         .from('products')
         .select('*')
-        .order('id');
+        .order('id', { ascending: true });
 
       if (error) throw new Error(error.message);
 
@@ -117,7 +117,7 @@ export class ProductService {
         .from('products')
         .select('*')
         .eq('category', category)
-        .order('id');
+        .order('id', { ascending: true });
 
       if (error) throw new Error(error.message);
 

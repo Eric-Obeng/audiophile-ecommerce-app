@@ -1,1 +1,79 @@
-<p>login works!</p>
+<div class="login-page">
+  <div class="login-container">
+    <h1 class="login-title">Welcome back</h1>
+    <p class="login-subtitle sub-title">
+      Don't have an account? <a [routerLink]="['/auth/signup']">Sign up</a>
+    </p>
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Success Message -->
+      @if (successMessage()) {
+      <div class="message success-message">{{ successMessage() }}</div>
+      }
+
+      <!-- Error Message -->
+      @if (errorMessage()) {
+      <div class="message error-message-global">{{ errorMessage() }}</div>
+      }
+
+      <div class="input-group">
+        <div class="form-field">
+          <input
+            id="email"
+            type="email"
+            placeholder="Email address"
+            formControlName="email"
+            [class.error]="hasError('email')"
+            autocomplete="email"
+          />
+          @if (hasError('email')) {
+          <span class="error-message">{{ getErrorMessage('email') }}</span>
+          }
+        </div>
+
+        <div class="form-field">
+          <div class="password-input-wrapper">
+            <input
+              id="password"
+              [type]="showPassword() ? 'text' : 'password'"
+              placeholder="Password"
+              formControlName="password"
+              [class.error]="hasError('password')"
+            />
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePasswordVisibility()"
+              [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+            >
+              @if (showPassword()) {
+              <span>👁️</span>
+              } @else {
+              <span>👁️‍🗨️</span>
+              }
+            </button>
+          </div>
+          @if (hasError('password')) {
+          <span class="error-message">{{ getErrorMessage('password') }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="forgot-password">
+        <a [routerLink]="['/auth/forgot-password']">Forgot your password?</a>
+      </div>
+
+      <button
+        class="btn"
+        type="submit"
+        [disabled]="loginForm.invalid || isSubmitting()"
+        [class.loading]="isSubmitting()"
+      >
+        @if (isSubmitting()) {
+        <span>Signing in...</span>
+        } @else {
+        <span>Sign in</span>
+        }
+      </button>
+    </form>
+  </div>
+</div>
