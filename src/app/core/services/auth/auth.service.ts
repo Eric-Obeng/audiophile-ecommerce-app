@@ -70,7 +70,7 @@ export class AuthService {
       const authUser: AuthUser = {
         id: user.id,
         email: user.email ?? '',
-        fullName: profile?.full_name ?? '',
+        fullName: user?.user_metadata['full_name'] ?? '',
         createdAt: user.created_at,
       };
 
