@@ -5,10 +5,11 @@ import { Router, RouterModule } from '@angular/router';
 import { SignupData } from '../../../core/models';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { CustomValidators, ValidationErrorMessages } from '../../../core/utils';
+import { AuthInput } from '../../../shared/components';
 
 @Component({
   selector: 'app-signup',
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, AuthInput],
   templateUrl: './signup.html',
   styleUrl: './signup.sass',
 })
@@ -18,7 +19,6 @@ export class Signup {
   private readonly router = inject(Router);
 
   isSubmitting = signal(false);
-  showPassword = signal(false);
   errorMessage = signal<string | null>(null);
   successMessage = signal<string | null>(null);
 
@@ -41,21 +41,14 @@ export class Signup {
     ],
   });
 
-  // Get error message for form controls using utility
   getErrorMessage(controlName: string): string {
     const control = this.signupForm.get(controlName);
     return ValidationErrorMessages.getErrorMessage(control, controlName);
   }
 
-  // Check if control has error and is touched using utility
   hasError(controlName: string): boolean {
     const control = this.signupForm.get(controlName);
     return ValidationErrorMessages.hasError(control);
-  }
-
-  // Toggle password visibility
-  togglePasswordVisibility(): void {
-    this.showPassword.update((current) => !current);
   }
 
   async onSubmit(): Promise<void> {
@@ -70,7 +63,6 @@ export class Signup {
 
     const formData = this.signupForm.value;
 
-    // Ensure all required fields are present
     if (!formData.fullName || !formData.email || !formData.password) {
       this.errorMessage.set('All fields are required');
       this.isSubmitting.set(false);
@@ -92,7 +84,6 @@ export class Signup {
         );
         this.signupForm.reset();
 
-        // Redirect to login page after a brief delay
         setTimeout(() => {
           this.router.navigate(['/auth/login']);
         }, 2000);
