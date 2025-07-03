@@ -187,6 +187,77 @@ export class AuthService {
     }
   }
 
+  async resetPassword(email: string): Promise<AuthResponse> {
+    this.isLoading.set(true);
+
+    try {
+      const { error } = await this.supabase
+        .getClient()
+        .auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/`,
+        });
+
+      if (error) {
+        return {
+          success: false,
+          error: this.getReadableError(error.message),
+        };
+      }
+
+      return {
+        success: true,
+      };
+    } catch (error) {
+      console.error('Reset password error:', error);
+      return {
+        success: false,
+        error: 'An unexpected error occurred',
+      };
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
+
+  async updatePassword(newPassword: string): Promise<AuthResponse> {
+    this.isLoading.set(true);
+
+    try {
+      const { data, error } = await this.supabase.getClient().auth.updateUser({
+        password: newPassword,
+      });
+
+      if (error) {
+        return {
+          success: false,
+          error: this.getReadableError(error.message),
+        };
+      }
+
+      if (!data.user) {
+        return {
+          success: false,
+          error: 'Failed to update password',
+        };
+      }
+
+      // Update the current user in our state
+      await this.setCurrentUser(data.user);
+
+      return {
+        success: true,
+        user: this.currentUser() || undefined,
+      };
+    } catch (error) {
+      console.error('Update password error:', error);
+      return {
+        success: false,
+        error: 'An unexpected error occurred',
+      };
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
+
   private getReadableError(message: string): string {
     // Convert Supabase error messages to user-friendly messages
     const errorMap: Record<string, string> = {
@@ -197,6 +268,10 @@ export class AuthService {
       'Password should be at least 6 characters':
         'Password must be at least 6 characters long',
       'Invalid email': 'Please enter a valid email address',
+      'User not found':
+        'If this email is registered, you will receive reset instructions',
+      'Email rate limit exceeded':
+        'Too many password reset requests. Please wait before trying again',
     };
 
     return errorMap[message] || message;

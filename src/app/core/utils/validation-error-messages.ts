@@ -30,6 +30,10 @@ export class ValidationErrorMessages {
       noSpecialChar:
         'Password must contain at least one special character (@$!%*?&)',
     },
+    confirmPassword: {
+      required: 'Please confirm your password',
+      passwordsMismatch: 'Passwords do not match',
+    },
   };
 
   /**
