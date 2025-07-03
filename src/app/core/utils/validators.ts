@@ -51,4 +51,31 @@ export class CustomValidators {
     const nameRegex = /^[a-zA-Z\s]+$/;
     return nameRegex.test(name) ? null : { invalidName: true };
   }
+
+  /**
+   * Validates that password and confirm password fields match
+   */
+  static passwordsMatch(passwordField: string, confirmPasswordField: string) {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const password = formGroup.get(passwordField);
+      const confirmPassword = formGroup.get(confirmPasswordField);
+
+      if (!password || !confirmPassword) {
+        return null;
+      }
+
+      if (password.value !== confirmPassword.value) {
+        confirmPassword.setErrors({ passwordsMismatch: true });
+        return { passwordsMismatch: true };
+      } else {
+        // Remove the passwordsMismatch error if passwords match
+        const errors = confirmPassword.errors;
+        if (errors) {
+          delete errors['passwordsMismatch'];
+          confirmPassword.setErrors(Object.keys(errors).length ? errors : null);
+        }
+        return null;
+      }
+    };
+  }
 }
