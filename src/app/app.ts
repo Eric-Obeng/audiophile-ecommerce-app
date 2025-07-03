@@ -23,9 +23,6 @@ export class App implements OnInit {
       const hashParams = new URLSearchParams(window.location.hash.substring(1));
       const urlParams = new URLSearchParams(window.location.search);
 
-      console.log('Hash params:', Object.fromEntries(hashParams));
-      console.log('URL params:', Object.fromEntries(urlParams));
-
       // Check for errors first
       const error = hashParams.get('error') ?? urlParams.get('error');
       const errorCode =
