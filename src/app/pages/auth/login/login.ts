@@ -4,10 +4,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { CustomValidators, ValidationErrorMessages } from '../../../core/utils';
+import { AuthInput } from '../../../shared/components';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, AuthInput],
   templateUrl: './login.html',
   styleUrl: './login.sass',
 })
@@ -17,7 +18,6 @@ export class Login {
   private readonly router = inject(Router);
 
   isSubmitting = signal(false);
-  showPassword = signal(false);
   errorMessage = signal<string | null>(null);
   successMessage = signal<string | null>(null);
 
@@ -29,21 +29,15 @@ export class Login {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  // Get error message for form controls using utility
   getErrorMessage(controlName: string): string {
     const control = this.loginForm.get(controlName);
     return ValidationErrorMessages.getErrorMessage(control, controlName);
   }
 
-  // Check if control has error and is touched using utility
+
   hasError(controlName: string): boolean {
     const control = this.loginForm.get(controlName);
     return ValidationErrorMessages.hasError(control);
-  }
-
-  // Toggle password visibility
-  togglePasswordVisibility(): void {
-    this.showPassword.update((current) => !current);
   }
 
   async onSubmit(): Promise<void> {
@@ -75,7 +69,6 @@ export class Login {
         this.successMessage.set('Login successful! Redirecting...');
         this.loginForm.reset();
 
-        // Redirect to home page after a brief delay
         setTimeout(() => {
           this.router.navigate(['/']);
         }, 1000);
