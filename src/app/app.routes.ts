@@ -45,7 +45,7 @@ export const routes: Routes = [
   {
     path: 'product/:slug',
     loadComponent: () =>
-      import('../app/pages/product-detail-page/product-detail-page').then(
+      import('./pages/product-detail-page/product-detail-page').then(
         (m) => m.ProductDetailPage
       ),
   },
