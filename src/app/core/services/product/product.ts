@@ -136,4 +136,46 @@ export class ProductService {
       this.loading.set(false);
     }
   }
+
+  async fetchProductBySlug(slug: string): Promise<CompleteProduct | null> {
+    try {
+      this.loading.set(true);
+      this.error.set(null);
+
+      const { data, error } = await this.supabaseService
+        .getClient()
+        .from('products')
+        .select('*')
+        .eq('slug', slug)
+        .single();
+
+      if (error) {
+        if (error.code === 'PGRST116') {
+          // Product not found
+          return null;
+        }
+        throw new Error(error.message);
+      }
+
+      if (!data) return null;
+
+      const details = await this.fetchProductDetails(data.id);
+      const completeProduct: CompleteProduct = {
+        ...data,
+        images: details.images,
+        includes: details.includes,
+        gallery: details.gallery,
+        related_products: details.related_products,
+      };
+
+      return completeProduct;
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to fetch product';
+      this.error.set(errorMessage);
+      return null;
+    } finally {
+      this.loading.set(false);
+    }
+  }
 }
