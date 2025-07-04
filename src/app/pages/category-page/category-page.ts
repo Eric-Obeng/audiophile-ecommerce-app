@@ -48,7 +48,7 @@ export class CategoryPage {
       const products = await this.productService.fetchProductsByCategory(
         category
       );
-      this.products.set(products.reverse());
+      this.products.set([...products].reverse());
     } catch (err) {
       this.error.set('Failed to load products. Please try again later.');
       console.error('Error fetching category products:', err);
