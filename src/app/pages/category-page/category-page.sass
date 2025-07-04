@@ -31,16 +31,19 @@
 
     .product-list
       @include flex-container(column, center, center, nowrap, 12rem)
-      width: 91%
-      margin: 0 auto
-      padding: 2rem 0
       margin-bottom: 8rem
+      padding: 3.2rem 2.4rem
 
       @include mq(tablet)
-        width: 89%
+        padding: 3rem 2.4re
 
       @include mq(desktop)
-        width: 77%
+        padding: 3rem 16.5rem
+        
+        app-product-card:nth-child(even)
+          ::ng-deep .product-card
+            flex-direction: row-reverse
+
 
     .empty
       text-align: center
