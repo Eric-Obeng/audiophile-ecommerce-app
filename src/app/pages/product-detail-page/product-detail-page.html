@@ -1,4 +1,143 @@
-<div>
+<div class="product-detail-container">
+  <div class="product-detail-content">
+    @if (loading()) {
+    <app-loading-spinner></app-loading-spinner>
+    } @else if (error()) {
+    <h1 class="error">{{ error() }}</h1>
+    } @else if (product()) {
+    <button class="go-back" (click)="goBack()">Go Back</button>
+
+    <!-- Product Hero Section -->
+    <section class="product-hero">
+      <div class="product-image">
+        @if (mainImage()) {
+        <picture>
+          <source
+            media="(min-width: 1024px)"
+            [srcset]="getMainImage('desktop')"
+          />
+          <source
+            media="(min-width: 768px)"
+            [srcset]="getMainImage('tablet')"
+          />
+          <img
+            [ngSrc]="getMainImage('mobile')"
+            [alt]="product()!.name"
+            width="540"
+            height="560"
+            priority
+          />
+        </picture>
+        }
+      </div>
+      <div class="product-info">
+        @if (product()!.new) {
+        <span class="new-product">New Product</span>
+        }
+        <h1>{{ product()!.name }}</h1>
+        <p class="description">{{ product()!.description }}</p>
+        <p class="price">{{ formattedPrice() }}</p>
+
+        <!-- Add to Cart Controls -->
+        <div class="add-to-cart">
+          <div class="quantity-control">
+            <button (click)="decrementQuantity()" [disabled]="quantity() <= 1">
+              -
+            </button>
+            <span>{{ quantity() }}</span>
+            <button (click)="incrementQuantity()">+</button>
+          </div>
+          <button class="add-to-cart-btn" (click)="addToCart()">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="features">
+        <h2>Features</h2>
+        <p>
+          {{product()!.features}}
+        </p>
+      </div>
+
+      <!-- In the Box Section -->
+      <div class="in-the-box">
+        <h2>In the Box</h2>
+        @if (product()!.includes && product()!.includes!.length > 0) {
+        <ul>
+          @for (item of product()!.includes!; track item.id) {
+          <li>
+            <span class="quantity">{{ item.quantity }}x</span>
+            <span class="item-name">{{ item.item }}</span>
+          </li>
+          }
+        </ul>
+        }
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    @if (product()!.gallery && product()!.gallery!.length > 0) {
+    <section class="gallery-section">
+      <div class="gallery-grid">
+        @for (galleryItem of product()!.gallery!; track galleryItem.id) {
+        <div class="gallery-item" [class]="galleryItem.position">
+          <picture>
+            <source
+              media="(min-width: 1024px)"
+              [srcset]="galleryItem.desktop_url"
+            />
+            <source
+              media="(min-width: 768px)"
+              [srcset]="galleryItem.tablet_url"
+            />
+            <img
+              [ngSrc]="galleryItem.mobile_url"
+              [alt]="product()!.name + ' gallery'"
+              width="445"
+              height="280"
+            />
+          </picture>
+        </div>
+        }
+      </div>
+    </section>
+    }
+
+    <!-- Related Products Section -->
+    @if (product()!.related_products && product()!.related_products!.length > 0)
+    {
+    <section class="related-products">
+      <h2>You may also like</h2>
+      <div class="related-grid">
+        @for (related of product()!.related_products!; track related.id) {
+        <div class="related-item">
+          <picture>
+            <source
+              media="(min-width: 1024px)"
+              [srcset]="related.image_desktop"
+            />
+            <source
+              media="(min-width: 768px)"
+              [srcset]="related.image_tablet"
+            />
+            <img
+              [src]="related.image_mobile"
+              [alt]="related.name"
+            />
+          </picture>
+          <h3>{{ related.name }}</h3>
+          <button class="see-product">See Product</button>
+        </div>
+        }
+      </div>
+    </section>
+    } }
+  </div>
+
   <app-category-menu></app-category-menu>
   <app-info></app-info>
   <app-footer></app-footer>
