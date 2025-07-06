@@ -66,4 +66,8 @@ export class CategoryPage {
       'assets/shared/desktop/image-category-thumbnail-fallback.png'
     );
   }
+
+  isEvenIndex(index: number): boolean {
+    return index % 2 === 1; // Note: 0-based index, so 1,3,5... are "even" positioned items
+  }
 }
