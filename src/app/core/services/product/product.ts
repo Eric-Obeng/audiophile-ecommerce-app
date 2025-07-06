@@ -74,11 +74,16 @@ export class ProductService {
       .select('*')
       .eq('product_id', productId);
 
-    // Fetch related products
+    // Fetch related products with product details
     const { data: relatedProducts } = await this.supabaseService
       .getClient()
       .from('related_products')
-      .select('*')
+      .select(
+        `
+        *,
+        related_product:products!related_product_id(slug, name)
+      `
+      )
       .eq('product_id', productId);
 
     return {
@@ -176,6 +181,30 @@ export class ProductService {
       return null;
     } finally {
       this.loading.set(false);
+    }
+  }
+
+  async fetchProductById(id: number): Promise<Product | null> {
+    try {
+      const { data, error } = await this.supabaseService
+        .getClient()
+        .from('products')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (error) {
+        if (error.code === 'PGRST116') {
+          // Product not found
+          return null;
+        }
+        throw new Error(error.message);
+      }
+
+      return data;
+    } catch (err) {
+      console.error('Error fetching product by ID:', err);
+      return null;
     }
   }
 }
