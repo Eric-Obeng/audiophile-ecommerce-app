@@ -4,11 +4,15 @@
 .category-menu-container
   @include flex-container(column, flex-start, flex-start, nowrap, 1.6rem)
   padding: 4rem 2.4rem
+  width: 100%
 
   @include mq(tablet)
     @include flex-container(row, flex-start, center, nowrap, 1rem)
 
   @include mq($key: desktop)
     gap: 3rem
+
+  app-category-card
+    width: 100%
 
 
