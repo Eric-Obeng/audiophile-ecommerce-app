@@ -43,8 +43,11 @@ export interface RelatedProduct {
   image_mobile: string;
   image_tablet: string;
   image_desktop: string;
-  related_product?: Product;
-  name: string
+  related_product?: {
+    slug: string;
+    name: string;
+  };
+  name: string;
 }
 
 export interface CompleteProduct extends Product {
