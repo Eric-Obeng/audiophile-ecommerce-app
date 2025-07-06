@@ -31,6 +31,7 @@ export class ProductDetailPage implements OnInit {
   loading = signal<boolean>(false);
   error = signal<string | null>(null);
   quantity = signal<number>(1);
+  navigatingToRelated = signal<boolean>(false);
 
   // Computed properties
   formattedPrice = computed(() => {
@@ -115,5 +116,35 @@ export class ProductDetailPage implements OnInit {
 
   goBack() {
     window.history.back();
+  }
+
+  async navigateToRelatedProduct(relatedProductId: number) {
+    try {
+      this.navigatingToRelated.set(true);
+
+      // Find the related product in the current product's related_products array
+      const product = this.product();
+      const relatedProduct = product?.related_products?.find(
+        (rp) => rp.related_product_id === relatedProductId
+      );
+
+      if (relatedProduct?.related_product?.slug) {
+        this.router.navigate(['/product', relatedProduct.related_product.slug]);
+      } else {
+        // Fallback to fetching product by ID if slug is not available
+        const fetchedProduct = await this.productService.fetchProductById(
+          relatedProductId
+        );
+        if (fetchedProduct) {
+          this.router.navigate(['/product', fetchedProduct.slug]);
+        } else {
+          console.error('Related product not found');
+        }
+      }
+    } catch (err) {
+      console.error('Error navigating to related product:', err);
+    } finally {
+      this.navigatingToRelated.set(false);
+    }
   }
 }
