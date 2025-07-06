@@ -58,9 +58,7 @@
     <section class="features-section">
       <div class="features">
         <h2>Features</h2>
-        <p>
-          {{product()!.features}}
-        </p>
+        <p>{{product()!.features}}</p>
       </div>
 
       <!-- In the Box Section -->
@@ -124,13 +122,16 @@
               media="(min-width: 768px)"
               [srcset]="related.image_tablet"
             />
-            <img
-              [src]="related.image_mobile"
-              [alt]="related.name"
-            />
+            <img [src]="related.image_mobile" [alt]="related.name" />
           </picture>
           <h3>{{ related.name }}</h3>
-          <button class="see-product">See Product</button>
+          <button
+            class="see-product"
+            (click)="navigateToRelatedProduct(related.related_product_id)"
+            [disabled]="navigatingToRelated()"
+          >
+            See Product
+          </button>
         </div>
         }
       </div>
