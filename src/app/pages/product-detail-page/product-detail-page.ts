@@ -115,7 +115,12 @@ export class ProductDetailPage implements OnInit {
   }
 
   goBack() {
-    window.history.back();
+    const product = this.product();
+    if (product?.category) {
+      this.router.navigate(['/category', product.category]);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   async navigateToRelatedProduct(relatedProductId: number) {

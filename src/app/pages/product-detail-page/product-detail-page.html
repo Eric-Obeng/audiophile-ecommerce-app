@@ -122,15 +122,18 @@
               media="(min-width: 768px)"
               [srcset]="related.image_tablet"
             />
-            <img [src]="related.image_mobile" [alt]="related.name" />
+            <img
+              [src]="related.image_mobile"
+              [alt]="related.related_product?.name || 'Product'"
+            />
           </picture>
-          <h3>{{ related.name }}</h3>
+          <h3>{{ related.related_product?.name || 'Unknown Product' }}</h3>
           <button
             class="see-product"
             (click)="navigateToRelatedProduct(related.related_product_id)"
             [disabled]="navigatingToRelated()"
           >
-            See Product
+           See Product
           </button>
         </div>
         }
