@@ -127,7 +127,7 @@
               [alt]="related.related_product?.name || 'Product'"
             />
           </picture>
-          <h3>{{ related.related_product?.name || 'Unknown Product' }}</h3>
+          <h3>{{ related.name || 'Unknown Product' }}</h3>
           <button
             class="see-product"
             (click)="navigateToRelatedProduct(related.related_product_id)"
