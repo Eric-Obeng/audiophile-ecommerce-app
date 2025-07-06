@@ -1,0 +1,274 @@
+@use '../../../styleSheet/_Variables' as *
+@use '../../../styleSheet/_breakpoints' as *
+@use '../../../styleSheet/_mixin' as *
+@use '../../../styleSheet/_typography' as *
+
+.product-detail-container
+  width: 100%
+
+  .product-detail-content
+    @include flex-container(column, center, center, nowrap, 6.4rem)
+    width: 100%
+    padding: 3.2rem 2.4rem
+
+    @include mq(tablet)
+      padding: 3rem 2.4rem
+
+    @include mq(desktop)
+      padding: 3rem 16.5rem
+      gap: 16rem
+
+
+
+    .go-back
+      background: none
+      border: none
+      color: $gray
+      cursor: pointer
+      font-size: 1.5rem
+      align-self: flex-start
+
+      &:hover
+        color: $primary-orange
+
+    .product-hero
+      @include flex-container(column, center, center, nowrap, 6.9rem)
+
+
+      @include mq(tablet)
+        flex-direction: row
+
+
+
+
+
+
+
+      .product-image
+        flex: 1
+
+        img
+          width: 100%
+          height: auto
+          border-radius: 8px
+
+      .product-info
+        @include flex-container(column, flex-start, flex-start, nowrap, 2.4rem)
+        flex: 1
+
+        .new-product
+          @extend .overline
+          color: $primary-orange
+          text-transform: uppercase
+
+        h1
+          @extend .h2-manrope-bold
+          text-transform: uppercase
+
+        .description
+          @extend .body-medium
+          color: $gray
+
+        .price
+          @extend .h6-manrope-bold
+
+        .add-to-cart
+          @include flex-container(row, center, flex-start, nowrap, 1.6rem)
+
+          .quantity-control
+            @include flex-container(row, center, center, nowrap, 0)
+            background: $light-grey
+
+            button, span
+              padding: 1.5rem 2rem
+              border: none
+              background: none
+              font-weight: 700
+              @extend .sub-title
+
+            button
+              cursor: pointer
+
+              &:hover
+                background: $primary-orange
+                color: $white
+
+              &:disabled
+                opacity: 0.5
+                cursor: not-allowed
+
+          .add-to-cart-btn
+            background: $primary-orange
+            color: $white
+            border: none
+            padding: 1.5rem 3rem
+            cursor: pointer
+            text-transform: uppercase
+            @extend .sub-title
+
+            &:hover
+              background: $primary-peach
+
+    .features-section
+      @include flex-container(column, flex-start, flex-start, nowrap, 8.8rem)
+
+
+      @include mq(tablet)
+        @include flex-container(column, flex-start, flex-start, nowrap, 12rem)
+
+      @include mq(desktop)
+        flex-direction: row
+
+      .features
+        flex: 1
+
+        h2
+          @extend .h3-manrope-bold
+          margin-bottom: 3.2rem
+          text-transform: uppercase
+
+        p
+          @extend .body-medium
+          color: $gray
+
+      .in-the-box
+        width: 100%
+        flex: 1
+
+        @include mq(tablet )
+          @include flex-container(row, flex-start, flex-start, nowrap, 2.4rem)
+
+        @include mq(desktop )
+          flex-direction: column
+
+        h2
+          @extend .h3-manrope-bold
+          margin-bottom: 3.2rem
+          text-transform: uppercase
+          flex: 1
+
+        ul
+          list-style: none
+          padding: 0
+          flex: 1
+
+          li
+            @include flex-container(row, flex-start, flex-start, nowrap, 2.4rem)
+            margin-bottom: 0.8rem
+
+            .quantity
+              color: $primary-orange
+              font-weight: 700
+              @extend .body-medium
+
+            .item-name
+              color: $gray
+              @extend .body-medium
+
+    .gallery-section
+      width: 100%
+
+
+      .gallery-grid
+        display: grid
+        grid-template-columns: 1fr
+        grid-template-rows: auto auto auto
+        gap: 2rem
+        height: auto
+
+        @include mq(tablet)
+          grid-template-columns: 1fr 1fr
+          grid-template-rows: 1fr 1fr
+          height: 60rem
+
+        .gallery-item
+          border-radius: 8px
+          overflow: hidden
+
+          &.first
+            grid-column: 1
+            grid-row: 1
+
+          &.second
+            grid-column: 1
+            grid-row: 2
+
+          &.third
+            grid-column: 2
+            grid-row: 1 / -1
+
+          @include mq(mobile)
+            &.first, &.second, &.third
+              grid-column: 1
+              grid-row: auto
+
+          @include mq(tablet)
+            &.first
+              grid-column: 1
+              grid-row: 1
+
+            &.second
+              grid-column: 1
+              grid-row: 2
+
+            &.third
+              grid-column: 2
+              grid-row: 1 / -1
+
+          img
+            width: 100%
+            height: 100%
+            object-fit: cover
+
+    .related-products
+      @include flex-container(column, center, center, nowrap, 4rem)
+
+      h2
+        @extend .h3-manrope-bold
+        text-transform: uppercase
+
+      .related-grid
+        @include flex-container(column, center, center, nowrap, 3.2rem)
+
+        @include mq(tablet)
+          flex-direction: row
+
+        .related-item
+          @include flex-container(column, center, center, nowrap, 3.2rem)
+
+          @include mq(tablet)
+            @include flex-container(column, center, center, nowrap, 2.4rem)
+
+          img
+            max-width: 100%
+            object-fit: cover
+            border-radius: 8px
+
+          h3
+            @extend .h5-manrope-bold
+            text-transform: uppercase
+            text-align: center
+
+            @include mq(tablet)
+              font-size: 2rem
+
+          .see-product
+            background: $primary-orange
+            color: $white
+            border: none
+            padding: 1.5rem 3rem
+            cursor: pointer
+            text-transform: uppercase
+            @extend .sub-title
+            text-decoration: none
+            display: inline-block
+
+            @include mq(tablet)
+              padding: 1.2rem 2.4rem
+
+            &:hover
+              background: $primary-peach
+
+  .error
+    text-align: center
+    padding: 3rem

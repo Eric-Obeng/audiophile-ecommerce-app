@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Supabase } from '../supabase/supabase';
 import {
   CompleteProduct,
@@ -15,36 +15,18 @@ import {
 export class ProductService {
   readonly supabaseService = inject(Supabase);
 
-  products = signal<CompleteProduct[]>([]);
-  loading = signal<boolean>(false);
-  error = signal<string | null>(null);
-
   async fetchAllProducts(): Promise<CompleteProduct[]> {
-    try {
-      this.loading.set(true);
-      this.error.set(null);
+    const { data, error } = await this.supabaseService
+      .getClient()
+      .from('products')
+      .select('*')
+      .order('id', { ascending: true });
 
-      const { data, error } = await this.supabaseService
-        .getClient()
-        .from('products')
-        .select('*')
-        .order('id', { ascending: true });
+    if (error) throw new Error(error.message);
+    if (!data) return [];
 
-      if (error) throw new Error(error.message);
-
-      if (!data) return [];
-
-      const productsWithDetails = await this.addDetailsToProducts(data);
-      this.products.set(productsWithDetails);
-      return productsWithDetails;
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Failed to fetch products';
-      this.error.set(errorMessage);
-      return [];
-    } finally {
-      this.loading.set(false);
-    }
+    const productsWithDetails = await this.addDetailsToProducts(data);
+    return productsWithDetails;
   }
 
   private async fetchProductDetails(productId: number): Promise<{
@@ -74,11 +56,16 @@ export class ProductService {
       .select('*')
       .eq('product_id', productId);
 
-    // Fetch related products
+    // Fetch related products with product details
     const { data: relatedProducts } = await this.supabaseService
       .getClient()
       .from('related_products')
-      .select('*')
+      .select(
+        `
+        *,
+        related_product:products!related_product_id(slug, name)
+      `
+      )
       .eq('product_id', productId);
 
     return {
@@ -108,32 +95,66 @@ export class ProductService {
   }
 
   async fetchProductsByCategory(category: string): Promise<CompleteProduct[]> {
-    try {
-      this.loading.set(true);
-      this.error.set(null);
+    const { data, error } = await this.supabaseService
+      .getClient()
+      .from('products')
+      .select('*')
+      .eq('category', category)
+      .order('id', { ascending: true });
 
-      const { data, error } = await this.supabaseService
-        .getClient()
-        .from('products')
-        .select('*')
-        .eq('category', category)
-        .order('id', { ascending: true });
+    if (error) throw new Error(error.message);
+    if (!data) return [];
 
-      if (error) throw new Error(error.message);
+    const productsWithDetails = await this.addDetailsToProducts(data);
+    return productsWithDetails;
+  }
 
-      if (!data) return [];
+  async fetchProductBySlug(slug: string): Promise<CompleteProduct | null> {
+    const { data, error } = await this.supabaseService
+      .getClient()
+      .from('products')
+      .select('*')
+      .eq('slug', slug)
+      .single();
 
-      const productsWithDetails = await this.addDetailsToProducts(data);
-      return productsWithDetails;
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error
-          ? err.message
-          : `Failed to fetch ${category} products`;
-      this.error.set(errorMessage);
-      return [];
-    } finally {
-      this.loading.set(false);
+    if (error) {
+      if (error.code === 'PGRST116') {
+        // Product not found
+        return null;
+      }
+      throw new Error(error.message);
     }
+
+    if (!data) return null;
+
+    const details = await this.fetchProductDetails(data.id);
+    const completeProduct: CompleteProduct = {
+      ...data,
+      images: details.images,
+      includes: details.includes,
+      gallery: details.gallery,
+      related_products: details.related_products,
+    };
+
+    return completeProduct;
+  }
+
+  async fetchProductById(id: number): Promise<Product | null> {
+    const { data, error } = await this.supabaseService
+      .getClient()
+      .from('products')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        // Product not found
+        return null;
+      }
+      throw new Error(error.message);
+    }
+
+    return data;
   }
 }

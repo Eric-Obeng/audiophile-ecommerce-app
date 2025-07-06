@@ -12,6 +12,7 @@ import { CompleteProduct } from '../../../core/models/products.model';
 })
 export class ProductCard {
   product = input.required<CompleteProduct>();
+  reverseLayout = input<boolean>(false);
 
   findCategoryImage(
     product: CompleteProduct,

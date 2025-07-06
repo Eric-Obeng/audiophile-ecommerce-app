@@ -11,8 +11,11 @@
     <div class="empty">No products found in this category</div>
     } @else {
     <div class="product-list">
-      @for (product of products(); track product.id) {
-      <app-product-card [product]="product"></app-product-card>
+      @for (product of products(); track product.id; let i = $index) {
+      <app-product-card
+        [product]="product"
+        [reverseLayout]="isEvenIndex(i)"
+      ></app-product-card>
       }
     </div>
     }
