@@ -48,7 +48,7 @@ export class CategoryPage {
       const products = await this.productService.fetchProductsByCategory(
         category
       );
-      this.products.set(products);
+      this.products.set([...products].reverse());
     } catch (err) {
       this.error.set('Failed to load products. Please try again later.');
       console.error('Error fetching category products:', err);
@@ -65,5 +65,9 @@ export class CategoryPage {
       categoryImage?.desktop_url ??
       'assets/shared/desktop/image-category-thumbnail-fallback.png'
     );
+  }
+
+  isEvenIndex(index: number): boolean {
+    return index % 2 === 1; // Note: 0-based index, so 1,3,5... are "even" positioned items
   }
 }

@@ -43,6 +43,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'product/:slug',
+    loadComponent: () =>
+      import('./pages/product-detail-page/product-detail-page').then(
+        (m) => m.ProductDetailPage
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

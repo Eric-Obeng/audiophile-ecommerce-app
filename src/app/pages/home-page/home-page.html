@@ -47,7 +47,9 @@
           truly remarkable sound.
         </p>
 
-        <a href="/products/zx9-speaker" class="button-link"> SEE PRODUCT </a>
+        <button type="button" class="button-link" (click)="navigateToProduct('zx9-speaker')">
+          SEE PRODUCT
+        </button>
       </div>
     </div>
     <div class="zx7 card">
@@ -68,7 +70,9 @@
       </picture>
       <div class="zx7-content content">
         <h3 class="h3-manrope-bold">ZX7 SPEAKER</h3>
-        <a href="/products/zx9-speaker" class="button-link"> SEE PRODUCT </a>
+        <button class="button-link" (click)="navigateToProduct('zx7-speaker')">
+          SEE PRODUCT
+        </button>
       </div>
     </div>
     <div class="yx1 card">
@@ -93,7 +97,12 @@
       <div class="yx1-content content">
         <h3 class="h3-manrope-bold">YX1 EARPHONES</h3>
 
-        <a href="/products/zx9-speaker" class="button-link"> SEE PRODUCT </a>
+        <button
+          class="button-link"
+          (click)="navigateToProduct('yx1-earphones')"
+        >
+          SEE PRODUCT
+        </button>
       </div>
     </div>
   </div>

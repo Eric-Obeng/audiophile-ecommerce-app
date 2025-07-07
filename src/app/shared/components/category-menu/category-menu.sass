@@ -2,15 +2,18 @@
 @use '../../../../styleSheet/_breakpoints' as *
 
 .category-menu-container
-  @include flex-container(column, _, _, nowrap, 1.6rem)
+  @include flex-container(column, flex-start, flex-start, nowrap, 1.6rem)
   padding: 4rem 2.4rem
+  width: 100%
 
-@include mq(tablet)
-  .category-menu-container
+  @include mq(tablet)
     @include flex-container(row, flex-start, center, nowrap, 1rem)
 
-@include mq($key: desktop)
-  .category-menu-container
+  @include mq($key: desktop)
+    padding: 4rem 16.5rem
     gap: 3rem
+
+  app-category-card
+    width: 100%
 
 

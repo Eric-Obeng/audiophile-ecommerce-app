@@ -15,7 +15,7 @@
   @include mq($key: desktop)
     @include flex-container(row, space-between, center, nowrap, 12.5rem)
 
-    &:nth-child(even)
+    &.reverse-layout
       flex-direction: row-reverse
 
   .product-image
@@ -56,6 +56,7 @@
 
     h2
       margin-top: 0
+      text-align: center
 
       @include mq($key: tablet)
         margin-top: 1.6rem

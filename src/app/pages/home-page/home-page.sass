@@ -4,6 +4,19 @@
 
 .home-container
   width: 100%
+  @include flex-container(
+    column,
+    flex-start,
+    flex-start,
+    nowrap,
+    4rem
+  )
+
+  @include mq(tablet)
+    gap: 9.6rem
+
+  @include mq(desktop)
+    gap: 16.8rem
 
   .hero-wrapper
     width: 100%
@@ -13,18 +26,12 @@
 
   .categories
     width: 100%
-    min-height: 50px
-
-    @include mq(tablet )
-      padding: 9.6rem 3.9rem
-
-    @include mq($key: desktop)
-      padding: 16.5rem 15.5rem
 
 
   .col-2
     @include flex-container(column, _, center, nowrap, 2.4rem)
     padding: 2.4rem
+    width: 100%
 
     @include mq($key: desktop)
       padding: 1rem 16.5rem
@@ -75,6 +82,13 @@
         .button-link
           padding: 1.5rem 3rem
           text-decoration: none
+          border: none
+          color: $white
+          cursor: pointer
+          text-transform: uppercase
+
+          &:hover
+            background-color: $primary-peach
 
 
       .zx9-content
@@ -177,68 +191,6 @@
               background: $black
               color: $white
               transition: background 0.3s ease-in-out, color 0.3s ease-in-out
-
-  .col-3
-    @include flex-container(column,center,center, nowrap, 4rem)
-    padding: 2.4rem
-    margin: 12rem 0
-
-    @include mq($key: desktop)
-      flex-direction: row-reverse
-      padding: 1rem 16.5rem
-      margin: 15rem 0
-
-
-    @include mq($key: large)
-      justify-content: space-between
-      margin: 20rem 0
-
-
-    picture
-      display: block
-      width: 100%
-      border-radius: 1rem
-      overflow: hidden
-
-      @include mq(large)
-        width: 84rem
-
-
-      img
-        width: 100%
-        height: auto
-        display: block
-
-    .about-content
-      @include flex-container(column,center,center, nowrap, 3.2rem)
-
-      @include mq($key: tablet)
-        max-width: 57.3rem
-
-      @include mq($key: desktop)
-        max-width: 44.5rem
-      @include mq($key: large)
-        max-width: 60rem
-
-      .h4-manrope-bold
-        text-align: center
-        text-transform: uppercase
-
-        @include mq(large)
-          font-size: 4rem
-          letter-spacing: 0.2rem
-
-        .orange
-          color: $primary-orange
-
-      .body-medium
-        text-align: center
-        opacity: 0.5
-        color: $black
-
-        @include mq(large)
-          font-size: 2.5rem
-          line-height: 1.3
 
 
 

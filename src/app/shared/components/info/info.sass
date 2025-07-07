@@ -5,17 +5,15 @@
 .col-3
   @include flex-container(column,center,center, nowrap, 4rem)
   padding: 2.4rem
-  margin: 12rem 0
+  width: 100%
 
   @include mq($key: desktop)
     flex-direction: row-reverse
     padding: 1rem 16.5rem
-    margin: 15rem 0
 
 
   @include mq($key: large)
     justify-content: space-between
-    margin: 20rem 0
 
 
   picture
