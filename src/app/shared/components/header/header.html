@@ -71,8 +71,17 @@
     </nav>
 
     <!-- cart -->
-    <button class="header-btn cart-button" aria-label="View cart">
-      <img src="assets/icon-cart.svg" alt="cart icon" />
+    <button
+      class="header-btn cart-button"
+      aria-label="View cart"
+      (click)="onCartClick()"
+    >
+      <div class="cart-icon-container">
+        <img src="assets/icon-cart.svg" alt="cart icon" />
+        @if (cartCount() > 0) {
+        <span class="cart-count-badge">{{ cartCount() }}</span>
+        }
+      </div>
     </button>
   </div>
 </header>
