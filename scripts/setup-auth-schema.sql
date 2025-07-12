@@ -36,7 +36,7 @@ BEGIN
   );
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = '';
 
 -- Create trigger for automatic profile creation
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
@@ -51,7 +51,7 @@ BEGIN
   NEW.updated_at = NOW();
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SET search_path = '';
 
 -- Create trigger for updating updated_at timestamp
 DROP TRIGGER IF EXISTS update_profiles_updated_at ON profiles;
