@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { AuthService } from '../../../core/services/auth/auth.service';
@@ -19,6 +24,15 @@ export class Header {
 
   isAuthenticated = this.authService.isAuthenticated;
   cartCount = this.cartService.cartCount;
+  isMobileMenuOpen = signal(false);
+
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen.update((isOpen) => !isOpen);
+  }
+
+  closeMobileMenu(): void {
+    this.isMobileMenuOpen.set(false);
+  }
 
   onCartClick(): void {
     if (!this.isAuthenticated()) {
@@ -45,6 +59,13 @@ export class Header {
           position: 'top-right',
         }
       );
+    }
+  }
+
+  // Handle keyboard navigation for accessibility
+  onKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape' && this.isMobileMenuOpen()) {
+      this.closeMobileMenu();
     }
   }
 }
