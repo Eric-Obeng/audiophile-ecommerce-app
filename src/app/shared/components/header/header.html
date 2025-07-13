@@ -3,7 +3,7 @@
     <!-- hamburger -->
     <button
       class="header-btn menu-toggle"
-      aria-label="Toggle menu"
+      [attr.aria-label]="getMenuAriaLabel()"
       [attr.aria-expanded]="isMobileMenuOpen()"
       (click)="toggleMobileMenu()"
     >

@@ -68,4 +68,9 @@ export class Header {
       this.closeMobileMenu();
     }
   }
+
+  // Dynamic aria-label for menu button accessibility
+  getMenuAriaLabel(): string {
+    return this.isMobileMenuOpen() ? 'Close menu' : 'Open menu';
+  }
 }
