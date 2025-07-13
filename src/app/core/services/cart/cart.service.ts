@@ -58,15 +58,8 @@ export class CartService {
       // Check if item already exists in cart
       const existingItem = await this.getCartItem(cart.id, request.product_id);
 
-      console.log('Existing item:', existingItem);
-
       if (existingItem) {
         // Update existing item quantity using upsert
-        console.log(
-          `Updating quantity from ${existingItem.quantity} to ${
-            existingItem.quantity + request.quantity
-          }`
-        );
         const { error: updateError } = await this.supabase
           .getClient()
           .from('cart_items')
@@ -84,13 +77,11 @@ export class CartService {
 
         if (updateError) {
           console.error('Update cart item error:', updateError);
-          console.error('Error details:', JSON.stringify(updateError, null, 2));
           return {
             success: false,
             error: updateError.message || 'Failed to update cart item',
           };
         }
-        console.log('Item quantity updated successfully');
       } else {
         // Add new item to cart
         const { error: insertError } = await this.supabase
