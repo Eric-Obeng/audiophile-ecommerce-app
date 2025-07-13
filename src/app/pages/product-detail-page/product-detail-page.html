@@ -41,14 +41,23 @@
         <!-- Add to Cart Controls -->
         <div class="add-to-cart">
           <div class="quantity-control">
-            <button (click)="decrementQuantity()" [disabled]="quantity() <= 1">
+            <button
+              (click)="decrementQuantity()"
+              [disabled]="quantity() <= 1 || addingToCart()"
+            >
               -
             </button>
             <span>{{ quantity() }}</span>
-            <button (click)="incrementQuantity()">+</button>
+            <button (click)="incrementQuantity()" [disabled]="addingToCart()">
+              +
+            </button>
           </div>
-          <button class="add-to-cart-btn" (click)="addToCart()">
-            Add to Cart
+          <button
+            class="add-to-cart-btn"
+            (click)="addToCart()"
+            [disabled]="addingToCart()"
+          >
+            @if (addingToCart()) { Adding... } @else { Add to Cart }
           </button>
         </div>
       </div>
