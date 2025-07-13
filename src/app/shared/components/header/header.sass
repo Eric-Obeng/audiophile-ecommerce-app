@@ -9,6 +9,7 @@
   color: $white
   padding: 3.2rem 2.4rem
   border-bottom: 1px solid $gray
+  position: relative
 
   .header-container
     @include flex-container(row, center, space-between)
@@ -21,16 +22,91 @@
       outline: none
       color: $white
       cursor: pointer
+      position: relative
+      z-index: 1001
+
+    .menu-toggle
+      .close-icon
+        display: block
+
+      .hidden
+        display: none
 
     .navigation
       display: none
+
+      // Mobile menu styles
+      &.mobile-menu-open
+        display: block
+        position: absolute
+        top: 100%
+        left: 0
+        right: 0
+        background: $white
+        z-index: 1000
+        padding: 3.2rem 2.4rem
+        border-radius: 0 0 0.8rem 0.8rem
+        box-shadow: 0 0.4rem 1.6rem rgba(0, 0, 0, 0.1)
+
+        .nav-list
+          @include flex-container(column, flex-start, flex-start, nowrap, 2.4rem)
+
+          li
+            list-style: none
+            cursor: pointer
+            width: 100%
+
+            .nav-link
+              text-decoration: none
+              color: $black
+              font-size: 1.8rem
+              font-weight: 700
+              letter-spacing: 1.3px
+              transition: color 0.2s ease
+              display: block
+              padding: 1.2rem 0
+
+              &:hover, &.active
+                color: $primary-orange
+
+            .profile-toggle
+              background: none
+              border: none
+              outline: none
+              color: $black
+              cursor: pointer
+              text-decoration: none
+              font-size: 1.8rem
+              font-weight: 700
+              letter-spacing: 1.3px
+              font-family: inherit
+              padding: 1.2rem 0
+              display: block
+              width: 100%
+              text-align: left
+
+              &:hover
+                color: $primary-orange
+
+  // Mobile overlay
+  .mobile-overlay
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba(0, 0, 0, 0.4)
+    z-index: 999
+    backdrop-filter: blur(2px)
 
 
 @include mq(tablet)
   .header
     padding: 3.2rem 4rem
 
-
+    .navigation
+      &.mobile-menu-open
+        padding: 3.2rem 4rem
 
 @include mq('desktop')
   .header
@@ -41,7 +117,19 @@
         display: none
 
       .navigation
-        display: block
+        display: block !important
+        position: static
+        background: transparent
+        padding: 0
+        border-radius: 0
+        box-shadow: none
+
+        &.mobile-menu-open
+          position: static
+          background: transparent
+          padding: 0
+          border-radius: 0
+          box-shadow: none
 
         .nav-list
           @include flex-container(row, center, space-between, nowrap, 3.4rem)
@@ -49,10 +137,16 @@
           li
             list-style: none
             cursor: pointer
+            width: auto
 
             .nav-link
               text-decoration: none
               color: $white
+              font-size: inherit
+              font-weight: inherit
+              letter-spacing: inherit
+              padding: 0
+              display: inline
 
               &:hover, &.active
                 color: $primary-orange
@@ -72,6 +166,11 @@
                 font-size: inherit
                 font-weight: inherit
                 font-family: inherit
+                padding: 0
+                display: inline
+                width: auto
+                text-align: inherit
+                letter-spacing: inherit
 
                 &:hover
                   color: $primary-orange
@@ -121,6 +220,10 @@
                   &:hover
                     background: $primary-peach
 
+    // Hide mobile overlay on desktop
+    .mobile-overlay
+      display: none
+
 
 
     .header-btn
@@ -155,3 +258,28 @@
           // For double digits, expand width
           &:has-text
             min-width: 2.4rem
+
+  // Animation and transition styles
+  .navigation
+    transition: all 0.3s ease-in-out
+
+    &.mobile-menu-open
+      animation: slideDown 0.3s ease-out
+
+  .mobile-overlay
+    animation: fadeIn 0.3s ease-out
+
+// Keyframe animations
+@keyframes slideDown
+  from
+    opacity: 0
+    transform: translateY(-1rem)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+@keyframes fadeIn
+  from
+    opacity: 0
+  to
+    opacity: 1
