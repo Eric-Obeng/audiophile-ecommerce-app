@@ -11,6 +11,7 @@ import {
 } from '@angular/router';
 
 import { routes } from './app.routes';
+import { provideHotToastConfig } from '@ngxpert/hot-toast';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +26,6 @@ export const appConfig: ApplicationConfig = {
       withRouterConfig({
         paramsInheritanceStrategy: 'always',
       })
-    ),
+    ), provideHotToastConfig(),
   ],
 };
