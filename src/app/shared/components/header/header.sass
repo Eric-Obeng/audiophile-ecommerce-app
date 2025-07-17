@@ -10,9 +10,11 @@
   padding: 3.2rem 2.4rem
   border-bottom: 1px solid $gray
   position: relative
+  z-index: 1000
+  width: 100vw
 
   .header-container
-    @include flex-container(row, center, space-between)
+    @include flex-container(row, center, space-between, nowrap, 0px)
     width: 100%
     height: 100%
 
