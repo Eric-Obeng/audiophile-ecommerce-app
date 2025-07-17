@@ -1,0 +1,128 @@
+@use '../../../../styleSheet/_Variables' as *
+@use '../../../../styleSheet/_mixin' as *
+@use '../../../../styleSheet/_typography' as *
+@use '../../../../styleSheet/_breakpoints' as *
+
+.cart-popup-overlay
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  background: rgba(0,0,0,0.4)
+  @include flex-container(row, center, center)
+  z-index: 20
+
+  .cart-popup-card
+    position: absolute
+    background: $white
+    border-radius: 1.2rem
+    box-shadow: 0 0.4rem 1.6rem rgba(0,0,0,0.12)
+    width: 90vw
+    max-width: 32rem
+    padding: 3.2rem 2.8rem
+    @include flex-container(column, flex-start, center)
+    gap: 2.4rem
+
+    @include mq(tablet)
+      right: 4rem
+      top: 15rem
+
+    @include mq($key: desktop)
+      right: 20rem
+      top: 15rem
+
+    .cart-popup-header
+      @include flex-container(row, center, space-between)
+      color: $black
+      width: 100%
+
+      .remove-all
+        background: none
+        border: none
+        color: $gray
+        font-size: 1.2rem
+        cursor: pointer
+        text-decoration: underline
+
+        &:hover
+          color: $primary-orange
+
+    .cart-popup-items
+      @include flex-container(column, flex-start, center, nowrap, 1.6rem)
+      color: $black
+
+      .cart-popup-item
+        @include flex-container(row, center, space-between,nowrap,  1.6rem)
+        width: 100%
+
+        .cart-item-img
+          width: 6.4rem
+          height: 6.4rem
+          object-fit: contain
+          border-radius: 0.8rem
+          background: $off-white
+
+        .cart-item-details
+          flex: 1
+          @include flex-container(column, flex-start, center, nowrap, 0.2rem)
+
+
+          .cart-item-name
+            font-size: 1.5rem
+            font-weight: 700
+
+          .cart-item-price
+            font-size: 1.4rem
+            color: $gray
+            font-weight: 700
+
+
+        .cart-item-qty
+          @include flex-container(row, center, center, nowrap, 0.6rem)
+          background: $light-grey
+
+          button
+            width: 2.2rem
+            height: 2.2rem
+            border: none
+            background: none
+            color: $black
+            font-size: 1.2rem
+            font-weight: 700
+            cursor: pointer
+
+            &:hover
+              color: $primary-orange
+
+            &:disabled
+              opacity: 0.5
+              cursor: not-allowed
+
+    .cart-popup-total-row
+      width: 100%
+      @include flex-container(row, center, space-between)
+      color: $black
+
+      .cart-total-label
+        font-size: 1.2rem
+        color: $gray
+        font-weight: 700
+
+      .cart-total-value
+        font-size: 1.6rem
+        font-weight: 700
+
+    .cart-popup-checkout
+      width: 100%
+      padding: 1.2rem 0
+      background: $primary-orange
+      color: $white
+      font-size: 1.3rem
+      font-weight: 700
+      border: none
+      border-radius: 0.6rem
+      cursor: pointer
+
+      &:hover
+        background: $primary-peach
