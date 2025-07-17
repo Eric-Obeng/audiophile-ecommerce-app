@@ -9,15 +9,17 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { CartService } from '../../../core/services/cart/cart.service';
+import { CartPopupComponent } from '../cart-popup/cart-popup';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, CommonModule],
+  imports: [RouterLink, RouterLinkActive, CommonModule, CartPopupComponent],
   templateUrl: './header.html',
   styleUrl: './header.sass',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
+  // ...existing code...
   private readonly authService = inject(AuthService);
   private readonly cartService = inject(CartService);
   private readonly toastService = inject(HotToastService);
@@ -25,6 +27,9 @@ export class Header {
   isAuthenticated = this.authService.isAuthenticated;
   cartCount = this.cartService.cartCount;
   isMobileMenuOpen = signal(false);
+
+  // Signal for cart popup visibility
+  isCartPopupOpen = signal(false);
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen.update((isOpen) => !isOpen);
@@ -42,30 +47,22 @@ export class Header {
       });
       return;
     }
+    this.isCartPopupOpen.set(true);
+  }
 
-    // Navigate to cart page or open cart modal in the future
-    // For now, provide feedback that the user can access their cart
-    const itemCount = this.cartCount();
-    if (itemCount === 0) {
-      this.toastService.info('Your cart is empty', {
-        duration: 2000,
-        position: 'top-right',
-      });
-    } else {
-      this.toastService.success(
-        `You have ${itemCount} item${itemCount === 1 ? '' : 's'} in your cart`,
-        {
-          duration: 2000,
-          position: 'top-right',
-        }
-      );
-    }
+  closeCartPopup(): void {
+    this.isCartPopupOpen.set(false);
   }
 
   // Handle keyboard navigation for accessibility
   onKeydown(event: KeyboardEvent): void {
-    if (event.key === 'Escape' && this.isMobileMenuOpen()) {
-      this.closeMobileMenu();
+    if (event.key === 'Escape') {
+      if (this.isMobileMenuOpen()) {
+        this.closeMobileMenu();
+      }
+      if (this.isCartPopupOpen()) {
+        this.closeCartPopup();
+      }
     }
   }
 

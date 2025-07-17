@@ -124,3 +124,10 @@
   ></div>
   }
 </header>
+
+@if (isCartPopupOpen()) {
+<app-cart-popup
+  [isOpen]="isCartPopupOpen()"
+  (close)="closeCartPopup()"
+></app-cart-popup>
+}
