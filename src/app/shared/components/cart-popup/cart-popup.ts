@@ -78,7 +78,6 @@ export class CartPopupComponent {
   }
 
   checkout() {
-    // Implement navigation to checkout page or modal
     this.handleClose();
     this.route.navigate(['/checkout']);
   }
