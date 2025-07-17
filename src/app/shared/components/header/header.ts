@@ -19,7 +19,6 @@ import { CartPopupComponent } from '../cart-popup/cart-popup';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
-  // ...existing code...
   private readonly authService = inject(AuthService);
   private readonly cartService = inject(CartService);
   private readonly toastService = inject(HotToastService);
