@@ -1,0 +1,68 @@
+<div
+  class="cart-popup-overlay"
+  (click)="handleClose()"
+  (keydown)="handleClose()"
+>
+  <div
+    class="cart-popup-card"
+    (click)="$event.stopPropagation()"
+    (keydown)="handleClose()"
+  >
+    <div class="cart-popup-header">
+      <span class="cart-title h6-manrope-bold">CART ({{ cartCount() }})</span>
+      <button type="button" class="remove-all" (click)="removeAll()">
+        Remove all
+      </button>
+    </div>
+    <div class="cart-popup-items">
+      @for (item of cartItems(); track item.id) {
+      <div class="cart-popup-item">
+        <img
+          [src]="item.product?.images?.[0]?.desktop_url || ''"
+          alt="{{ item.product?.name }}"
+          class="cart-item-img"
+        />
+        <div class="cart-item-details">
+          <span class="cart-item-name">{{ item.product?.name }}</span>
+          <span class="cart-item-price"
+            >{{ item.product?.price | currency: 'USD' }}</span
+          >
+        </div>
+        <div class="cart-item-qty">
+          <div class="quantity-controls">
+            <button
+              type="button"
+              (click)="updateQuantity(item.id, item.quantity - 1)"
+              [disabled]="item.quantity <= 1"
+            >
+              -
+            </button>
+            <span>{{ item.quantity }}</span>
+            <button
+              type="button"
+              (click)="updateQuantity(item.id, item.quantity + 1)"
+            >
+              +
+            </button>
+          </div>
+          <button
+            type="button"
+            class="remove-item"
+            aria-label="Remove item"
+            (click)="removeFromCart(item.id)"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="cart-popup-total-row">
+      <span class="cart-total-label">TOTAL</span>
+      <span class="cart-total-value">{{ total() | currency: 'USD' }}</span>
+    </div>
+    <button type="button" class="cart-popup-checkout" (click)="checkout()">
+      CHECKOUT
+    </button>
+  </div>
+</div>
