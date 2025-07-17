@@ -9,6 +9,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../core/services/cart/cart.service';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-popup',
@@ -23,6 +24,7 @@ export class CartPopupComponent {
   cartItems = this.cartService.cartItems;
   cartCount = this.cartService.cartCount;
   toastService = inject(HotToastService);
+  route = inject(Router);
 
   // Use input() for open state, output() for close event
   isOpen = input<boolean>(false);
@@ -62,8 +64,22 @@ export class CartPopupComponent {
     this.cartService.updateCartItemQuantity(itemId, quantity);
   }
 
+  removeFromCart(itemId: number) {
+    this.cartService
+      .removeFromCart(itemId)
+      .then(() => {
+        this.toastService.success('Item removed from cart', { duration: 3000 });
+      })
+      .catch((error) => {
+        this.toastService.error('Failed to remove item: ' + error.message, {
+          duration: 3000,
+        });
+      });
+  }
+
   checkout() {
     // Implement navigation to checkout page or modal
     this.handleClose();
+    this.route.navigate(['/checkout']);
   }
 }

@@ -29,8 +29,8 @@
       top: 15rem
 
     @include mq($key: desktop)
-      right: 20rem
-      top: 15rem
+      right: 15rem
+      top: 10rem
 
     .cart-popup-header
       @include flex-container(row, center, space-between)
@@ -79,25 +79,37 @@
 
 
         .cart-item-qty
-          @include flex-container(row, center, center, nowrap, 0.6rem)
-          background: $light-grey
+          @include flex-container(column, center, center, nowrap, 0.6rem)
 
-          button
-            width: 2.2rem
-            height: 2.2rem
-            border: none
+          .quantity-controls
+            background: $light-grey
+            @include flex-container(row, center, center, nowrap, 0.6rem)
+
+            button
+              width: 2.2rem
+              height: 2.2rem
+              border: none
+              background: none
+              color: $black
+              font-size: 1.2rem
+              font-weight: 700
+              cursor: pointer
+
+              &:hover
+                color: $primary-orange
+
+              &:disabled
+                opacity: 0.5
+                cursor: not-allowed
+
+          .remove-item
             background: none
-            color: $black
-            font-size: 1.2rem
-            font-weight: 700
+            border: none
             cursor: pointer
+            color: $gray
 
             &:hover
               color: $primary-orange
-
-            &:disabled
-              opacity: 0.5
-              cursor: not-allowed
 
     .cart-popup-total-row
       width: 100%
