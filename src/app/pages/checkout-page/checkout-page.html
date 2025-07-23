@@ -1,1 +1,152 @@
-<p>checkout-page works!</p>
+<form
+  class="checkout_form"
+  [formGroup]="checkoutForm"
+  (ngSubmit)="submitCheckoutForm()"
+>
+  <button type="button" class="btn">Go back</button>
+  <div class="content">
+    <div class="checkout_div card">
+      <h3>Checkout</h3>
+      <div class="details billing_details" formGroupName="billingDetails">
+        <p>Billing Details</p>
+        <div class="inputs_wrapper">
+          <div class="input_container">
+            <label for="name">Name</label>
+            <app-auth-input
+              id="name"
+              type="text"
+              placeholder="Alexei Ward"
+              [formControlName]="'name'"
+            />
+          </div>
+          <div class="input_container">
+            <label for="email">Email Address</label>
+            <app-auth-input
+              id="email"
+              type="email"
+              placeholder="alexei@mail.com"
+              [formControlName]="'email'"
+            />
+          </div>
+          <div class="input_container">
+            <label for="phone">Phone</label>
+            <app-auth-input
+              id="phone"
+              type="tel"
+              placeholder="+1202-555-0136"
+              [formControlName]="'phone'"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="details shipping_info" formGroupName="shippingDetails">
+        <p>Shipping Info</p>
+        <div class="inputs_wrapper">
+          <div class="input_container">
+            <label for="address">Your Address</label>
+            <app-auth-input
+              id="address"
+              type="text"
+              placeholder="1137 Williams Avenue"
+              [formControlName]="'address'"
+            />
+          </div>
+          <div class="input_container">
+            <label for="zip">Zip Code</label>
+            <app-auth-input
+              id="zipCode"
+              type="number"
+              placeholder="10001"
+              [formControlName]="'zipCode'"
+            />
+          </div>
+          <div class="input_container">
+            <label for="city">City</label>
+            <app-auth-input
+              id="city"
+              type="text"
+              placeholder="New York"
+              [formControlName]="'city'"
+            />
+          </div>
+          <div class="input_container">
+            <label for="country">Country</label>
+            <app-auth-input
+              id="country"
+              type="text"
+              placeholder="United States"
+              [formControlName]="'country'"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="details payment_details" formGroupName="paymentDetails">
+        <p>Payment Details</p>
+        <div class="inputs_wrapper">
+          <label>Payment Methods</label>
+          <div class="input_container">
+            <div class="options">
+              <div class="radio_container">
+                <label for="e_money">eMoney</label>
+                <input
+                  id="e_money"
+                  type="radio"
+                  value="e-money"
+                  [formControlName]="'method'"
+                />
+              </div>
+              <div class="radio_container">
+                <label for="cash_on_delivery">Cash on Delivery</label>
+                <input
+                  id="cash_on_delivery"
+                  type="radio"
+                  value="cash-on-delivery"
+                  [formControlName]="'method'"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        @if (checkoutForm.get('paymentDetails.method')?.value !==
+        'cash-on-delivery') {
+        <div class="pin">
+          <div class="e-payment">
+            <label for="eMoneyNumber">e-Money Number</label>
+            <app-auth-input
+              id="eMoneyNumber"
+              type="tel"
+              placeholder="238521993"
+              [formControlName]="'eMoneyNumber'"
+            />
+          </div>
+          <div class="e-payment">
+            <label for="eMoneyPin">e-Money Pin</label>
+            <app-auth-input
+              id="eMoneyPin"
+              type="number"
+              placeholder="6891"
+              [formControlName]="'eMoneyPin'"
+            />
+          </div>
+        </div>
+        } @else {
+        <div class="cod">
+          <img src="assets/cod.png" alt="cash-on-delivery-icon" />
+          <p>
+            The ‘Cash on Delivery’ option enables you to pay in cash when our
+            delivery courier arrives at your residence. Just make sure your
+            address is correct so that your order will not be cancelled.
+          </p>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="summary_div card">
+      <h3>Summary</h3>
+      <div class="details summary_details"></div>
+      <div class="details summary_details"></div>
+      <button type="submit" class="pay-btn">Continue & Pay</button>
+    </div>
+  </div>
+</form>
+<app-footer />
