@@ -1,0 +1,183 @@
+@use '../../../styleSheet/_mixin' as *
+@use '../../../styleSheet/_Variables' as *
+@use '../../../styleSheet/_breakpoints' as *
+
+.checkout_form
+  @include flex-container(column, flex-start, flex-start, nowrap, 3.2rem )
+  padding: 3.2rem 2.4rem
+  width: 100%
+
+  @include mq(tablet)
+    padding: 3.2rem 4rem
+
+  @include mq(desktop)
+    padding: 3.2rem 16.5rem
+
+
+  .btn
+    background: none
+    border: none
+    cursor: pointer
+    font-family: inherit
+    color: $gray
+
+    &:hover
+      color: $primary-orange
+
+  .content
+    @include flex-container(column, flex-start, flex-start, nowrap, 3.2rem)
+    width: 100%
+
+    @include mq(desktop)
+      flex-direction: row
+
+
+    .card
+      background: $white
+      border-radius: 0.8rem
+      width: 100%
+      @include flex-container(column, flex-start, center, nowrap, 3.2rem)
+      padding: 2.4rem
+
+
+      h3
+        text-transform: uppercase
+
+
+      .pay-btn
+        background: $primary-orange
+        color: $white
+        width: 100%
+        height: 4.8rem
+        border: none
+        outline: none
+        cursor: pointer
+
+        &:hover
+          background: $primary-peach
+
+
+
+      .details
+        @include flex-container(column, flex-start, center, nowrap, 1.6rem)
+        width: 100%
+
+        p
+          color: $primary-orange
+          font-weight: 700
+          text-transform: uppercase
+
+        .inputs_wrapper
+          @include flex-container(column, flex-start, center, nowrap, 2.4rem)
+          width: 100%
+
+
+
+          .input_container
+            @include flex-container(column, flex-start, center, nowrap, 0.9rem)
+            width: 100%
+
+            label
+              font-weight: 700
+              font-size: 1.2rem
+
+            .options
+              @include flex-container(column, flex-start, flex-start, nowrap,1.6rem )
+              width: 100%
+              margin-bottom: 2rem
+
+              .radio_container
+                @include flex-container(row-reverse, center, flex-end, nowrap,1.6rem )
+                width: 100%
+                height: 4.2rem
+                padding: 0 1.6rem
+                border-radius: 0.8rem
+                border: 0.2rem solid $light-grey
+                font-size: 1.4rem
+                transition: border-color 0.2s ease
+
+                &:hover
+                  border-color: $primary-orange
+
+                .label
+                  font-size: 1.4rem
+                  font-weight: 700
+
+
+
+        .pin
+          @include flex-container(column, flex-start, flex-start, nowrap, 2.4rem)
+          width: 100%
+
+          @include mq(tablet)
+            flex-direction: row
+
+          .e-payment
+            @include flex-container(column, flex-start, center, nowrap, 0.9rem)
+            width: 100%
+
+            label
+              font-weight: 700
+              font-size: 1.2rem
+
+        .cod
+          @include flex-container(row, flex-start, flex-start, nowrap, .8rem)
+
+          @include mq(tablet)
+            gap: 3.2rem
+
+          p
+            color: $black
+            opacity: 0.5
+            font-size: 1.5rem
+            font-weight: 400
+
+      @include mq(tablet)
+        .billing_details
+          .inputs_wrapper
+            display: grid
+            grid-template-columns: 1fr 1fr
+            grid-template-rows: auto auto
+            grid-template-areas: "name email" "phone _"
+            gap: 2.4rem
+
+            .input_container:nth-child(1)
+              grid-area: name
+            .input_container:nth-child(2)
+              grid-area: email
+            .input_container:nth-child(3)
+              grid-area: phone
+
+      @include mq(tablet)
+        .shipping_info
+          .inputs_wrapper
+            display: grid
+            grid-template-columns: 1fr 1fr
+            grid-template-rows: auto auto
+            grid-template-areas: "address address" "zipCode city" "country _"
+            gap: 2.4rem
+
+            .input_container:nth-child(1)
+              grid-area: address
+            .input_container:nth-child(2)
+              grid-area: zipCode
+            .input_container:nth-child(3)
+              grid-area: city
+            .input_container:nth-child(4)
+              grid-area: country
+
+        .payment_details
+          .inputs_wrapper
+            flex-direction: row
+            justify-content: space-between
+            width: 100%
+
+            label
+              width: 100%
+
+            .input_container
+              flex-direction: column
+
+    .summary_div
+      @include mq(desktop)
+        width: 35rem
