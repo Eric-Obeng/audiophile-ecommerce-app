@@ -143,8 +143,46 @@
     </div>
     <div class="summary_div card">
       <h3>Summary</h3>
-      <div class="details summary_details"></div>
-      <div class="details summary_details"></div>
+      <div class="details summary_details">
+        <div class="cart-items-list">
+          @for (item of cartItems(); track item.id) {
+          <div class="cart-item">
+            <img
+              [src]="item.product?.images?.[0]?.desktop_url || ''"
+              alt="{{ item.product?.name }}"
+              class="cart-item-img"
+            />
+            <div class="cart-item-info">
+              <div class="details">
+                <span class="cart-item-name">{{ item.product?.name }}</span>
+                <span class="cart-item-price"
+                  >{{ item.product?.price | currency }}</span
+                >
+              </div>
+              <span class="cart-item-qty">x{{ item.quantity }}</span>
+            </div>
+          </div>
+          }
+        </div>
+        <div class="summary-totals">
+          <div class="summary-row">
+            <span class="label">Total</span>
+            <span class="value">{{ cartTotal() |currency}}</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Shipping</span>
+            <span class="value">{{ shipping() | currency}}</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">VAT (Included)</span>
+            <span class="value">{{ vat() | currency}}</span>
+          </div>
+          <div class="summary-row grand">
+            <span class="label">Grand Total</span>
+            <span class="value">{{ grandTotal() | currency}}</span>
+          </div>
+        </div>
+      </div>
       <button type="submit" class="pay-btn">Continue & Pay</button>
     </div>
   </div>

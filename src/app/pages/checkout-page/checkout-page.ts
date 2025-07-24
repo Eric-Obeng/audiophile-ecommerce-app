@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, computed, signal } from '@angular/core';
 import { AuthInput } from '../../shared/components/auth-input/auth-input';
 import { Footer } from '../../shared/components/footer/footer';
 import {
@@ -8,6 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../core/services/cart/cart.service';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-checkout-page',
@@ -17,6 +19,8 @@ import { CommonModule } from '@angular/common';
 })
 export class CheckoutPage {
   readonly fb = inject(FormBuilder);
+  readonly cartService = inject(CartService);
+  toastService = inject(HotToastService);
 
   checkoutForm: FormGroup = this.fb.group({
     billingDetails: this.fb.group({
@@ -38,6 +42,22 @@ export class CheckoutPage {
       eMoneyPin: ['', [Validators.minLength(4)]],
     }),
   });
+
+  cartItems = this.cartService.cartItems;
+  cartTotal = computed(() =>
+    this.cartItems().reduce(
+      (sum, item) => sum + (item.product?.price ?? 0) * item.quantity,
+      0
+    )
+  );
+  shipping = signal(50); // Flat shipping for demo, adjust as needed
+  vat = computed(() => this.calculateVAT(this.cartTotal()));
+  grandTotal = computed(() => this.cartTotal() + this.shipping() + this.vat());
+
+  calculateVAT(amount: number): number {
+    // Example: 20% VAT
+    return Math.round(amount * 0.2);
+  }
 
   constructor() {
     // Dynamically set required validators for eMoney fields based on payment method
@@ -69,7 +89,11 @@ export class CheckoutPage {
     console.log('submitting checkout details');
     if (this.checkoutForm.invalid) {
       this.checkoutForm.markAllAsTouched();
-      return
+      this.toastService.error(`All fields are required`, {
+        duration: 3000,
+        position: 'top-right',
+      });
+      return;
     }
 
     console.log(this.checkoutForm.value);

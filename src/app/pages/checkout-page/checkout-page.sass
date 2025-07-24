@@ -179,5 +179,77 @@
               flex-direction: column
 
     .summary_div
+      @include flex-container(column, flex-start, flex-start, nowrap, 3.2rem)
+      width: 100%
+
+      .cart-items-list
+        @include flex-container(column, center, center, nowrap, 2.4rem)
+        width: 100%
+
+        .cart-item
+          @include flex-container(row, center, center, nowrap, 1.6rem)
+          width: 100%
+
+          .cart-item-img
+            width: 6.4rem
+            height: 6.4rem
+            object-fit: contain
+            border-radius: 0.8rem
+            background: $off-white
+
+          .cart-item-info
+            @include flex-container(row, space-between, center, nowrap )
+            width: 100%
+
+            .details
+              @include flex-container(column, flex-start, center, nowrap, 0.2rem)
+
+              .cart-item-name
+                font-weight: 700
+
+              .cart-item-price
+                color: $gray
+                font-weight: bold
+
+            .cart-item-qty
+              color: $gray
+              font-weight: bold
+
+      .summary-totals
+        @include flex-container(column, flex-start, flex-start, nowrap, 1rem)
+        width: 100%
+        margin-top: 1.2rem
+
+        .summary-row
+          @include flex-container(row, center, space-between, nowrap, 1rem)
+          width: 100%
+
+          .label
+            font-weight: 300
+
+          .value
+            font-weight: bold
+
+          &.grand
+            margin-top: 2.4rem
+
+            .value
+              color: $primary-orange
+
       @include mq(desktop)
-        width: 35rem
+        width: 40rem
+
+
+// Error state styles for form inputs
+.error
+  label
+    color: $primary-orange
+  input, .auth-input
+    border: 2px solid $primary-orange !important
+    background: $off-white
+  .error-message
+    color: $primary-orange
+    font-size: 1.1rem
+    font-weight: 700
+    margin-left: auto
+    margin-bottom: 0.4rem
