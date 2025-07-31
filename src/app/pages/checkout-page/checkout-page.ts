@@ -55,7 +55,6 @@ export class CheckoutPage {
   grandTotal = computed(() => this.cartTotal() + this.shipping() + this.vat());
 
   calculateVAT(amount: number): number {
-    // Example: 20% VAT
     return Math.round(amount * 0.2);
   }
 
