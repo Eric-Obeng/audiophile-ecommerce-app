@@ -18,7 +18,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class AuthInput implements ControlValueAccessor {
   // Input signals
   id = input.required<string>();
-  type = input<'text' | 'email' | 'password'>('text');
+  type = input<'text' | 'email' | 'password' | 'tel' | 'number' | 'radio'>('text');
   placeholder = input<string>('');
   autocomplete = input<string>('');
   hasError = input<boolean>(false);
