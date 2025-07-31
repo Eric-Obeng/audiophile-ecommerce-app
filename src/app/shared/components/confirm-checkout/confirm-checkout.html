@@ -1,1 +1,11 @@
-<p>confirm-checkout works!</p>
+<div
+  class="confirm__checkout-overlay"
+  (click)="handleClose()"
+  (keydown)="handleClose()"
+>
+  <div
+    class="confirm__checkout-card"
+    (click)="$event.stopPropagation()"
+    (keydown)="handleClose()"
+  ></div>
+</div>

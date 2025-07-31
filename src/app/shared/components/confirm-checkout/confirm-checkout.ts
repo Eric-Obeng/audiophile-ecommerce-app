@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   selector: 'app-confirm-checkout',
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './confirm-checkout.sass'
 })
 export class ConfirmCheckout {
+  close = output<void>();
 
+  handleClose() {
+    this.close.emit();
+  }
 }
