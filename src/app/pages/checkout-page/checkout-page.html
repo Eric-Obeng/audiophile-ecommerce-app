@@ -17,6 +17,8 @@
               type="text"
               placeholder="Alexei Ward"
               [formControlName]="'name'"
+              [hasError]="!!(checkoutForm.get('billingDetails.name')?.invalid && (checkoutForm.get('billingDetails.name')?.touched || checkoutForm.get('billingDetails.name')?.dirty))"
+              [errorMessage]="checkoutForm.get('billingDetails.name')?.hasError('required') ? 'Name is required' : checkoutForm.get('billingDetails.name')?.hasError('minlength') ? 'Name must be at least 3 characters' : ''"
             />
           </div>
           <div class="input_container">
@@ -26,6 +28,8 @@
               type="email"
               placeholder="alexei@mail.com"
               [formControlName]="'email'"
+              [hasError]="!!(checkoutForm.get('billingDetails.email')?.invalid && (checkoutForm.get('billingDetails.email')?.touched || checkoutForm.get('billingDetails.email')?.dirty))"
+              [errorMessage]="checkoutForm.get('billingDetails.email')?.hasError('required') ? 'Email is required' : checkoutForm.get('billingDetails.email')?.hasError('email') ? 'Invalid email address' : ''"
             />
           </div>
           <div class="input_container">
@@ -35,6 +39,8 @@
               type="tel"
               placeholder="+1202-555-0136"
               [formControlName]="'phone'"
+              [hasError]="!!(checkoutForm.get('billingDetails.phone')?.invalid && (checkoutForm.get('billingDetails.phone')?.touched || checkoutForm.get('billingDetails.phone')?.dirty))"
+              [errorMessage]="checkoutForm.get('billingDetails.phone')?.hasError('required') ? 'Phone is required' : ''"
             />
           </div>
         </div>
@@ -49,6 +55,8 @@
               type="text"
               placeholder="1137 Williams Avenue"
               [formControlName]="'address'"
+              [hasError]="!!(checkoutForm.get('shippingDetails.address')?.invalid && (checkoutForm.get('shippingDetails.address')?.touched || checkoutForm.get('shippingDetails.address')?.dirty))"
+              [errorMessage]="checkoutForm.get('shippingDetails.address')?.hasError('required') ? 'Address is required' : ''"
             />
           </div>
           <div class="input_container">
@@ -58,6 +66,8 @@
               type="number"
               placeholder="10001"
               [formControlName]="'zipCode'"
+              [hasError]="!!(checkoutForm.get('shippingDetails.zipCode')?.invalid && (checkoutForm.get('shippingDetails.zipCode')?.touched || checkoutForm.get('shippingDetails.zipCode')?.dirty))"
+              [errorMessage]="checkoutForm.get('shippingDetails.zipCode')?.hasError('required') ? 'Zip code is required' : checkoutForm.get('shippingDetails.zipCode')?.hasError('minlength') ? 'Zip code must be at least 5 digits' : ''"
             />
           </div>
           <div class="input_container">
@@ -67,6 +77,8 @@
               type="text"
               placeholder="New York"
               [formControlName]="'city'"
+              [hasError]="!!(checkoutForm.get('shippingDetails.city')?.invalid && (checkoutForm.get('shippingDetails.city')?.touched || checkoutForm.get('shippingDetails.city')?.dirty))"
+              [errorMessage]="checkoutForm.get('shippingDetails.city')?.hasError('required') ? 'City is required' : ''"
             />
           </div>
           <div class="input_container">
@@ -76,6 +88,8 @@
               type="text"
               placeholder="United States"
               [formControlName]="'country'"
+              [hasError]="!!(checkoutForm.get('shippingDetails.country')?.invalid && (checkoutForm.get('shippingDetails.country')?.touched || checkoutForm.get('shippingDetails.country')?.dirty))"
+              [errorMessage]="checkoutForm.get('shippingDetails.country')?.hasError('required') ? 'Country is required' : ''"
             />
           </div>
         </div>
@@ -83,7 +97,7 @@
       <div class="details payment_details" formGroupName="paymentDetails">
         <p>Payment Details</p>
         <div class="inputs_wrapper">
-          <label>Payment Methods</label>
+          <label for="e_money">Payment Methods</label>
           <div class="input_container">
             <div class="options">
               <div class="radio_container">
@@ -117,6 +131,8 @@
               type="tel"
               placeholder="238521993"
               [formControlName]="'eMoneyNumber'"
+              [hasError]="!!(checkoutForm.get('paymentDetails.eMoneyNumber')?.invalid && (checkoutForm.get('paymentDetails.eMoneyNumber')?.touched || checkoutForm.get('paymentDetails.eMoneyNumber')?.dirty))"
+              [errorMessage]="checkoutForm.get('paymentDetails.eMoneyNumber')?.hasError('required') ? 'e-Money Number is required' : checkoutForm.get('paymentDetails.eMoneyNumber')?.hasError('minlength') ? 'e-Money Number must be at least 9 digits' : ''"
             />
           </div>
           <div class="e-payment">
@@ -126,6 +142,8 @@
               type="number"
               placeholder="6891"
               [formControlName]="'eMoneyPin'"
+              [hasError]="!!(checkoutForm.get('paymentDetails.eMoneyPin')?.invalid && (checkoutForm.get('paymentDetails.eMoneyPin')?.touched || checkoutForm.get('paymentDetails.eMoneyPin')?.dirty))"
+              [errorMessage]="checkoutForm.get('paymentDetails.eMoneyPin')?.hasError('required') ? 'e-Money Pin is required' : checkoutForm.get('paymentDetails.eMoneyPin')?.hasError('minlength') ? 'e-Money Pin must be at least 4 digits' : ''"
             />
           </div>
         </div>
@@ -183,7 +201,9 @@
           </div>
         </div>
       </div>
-      <button type="submit" class="pay-btn">Continue & Pay</button>
+      <button type="submit" class="pay-btn" [disabled]="!checkoutForm.valid">
+        Continue & Pay
+      </button>
     </div>
   </div>
 </form>
