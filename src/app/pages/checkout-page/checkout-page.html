@@ -208,3 +208,7 @@
   </div>
 </form>
 <app-footer />
+
+@if (showConfirmModal()) {
+<app-confirm-checkout (close)="closeConfirmModal()" />
+}
