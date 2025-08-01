@@ -14,20 +14,128 @@
   z-index: 20
 
   .confirm__checkout-card
-    position: absolute
+    position: relative
     background: $white
-    border-radius: 1.2rem
+    border-radius: 0.8rem
     box-shadow: 0 0.4rem 1.6rem rgba(0,0,0,0.12)
     width: 90vw
-    max-width: 32rem
-    padding: 3.2rem 2.8rem
-    @include flex-container(column, flex-start, center)
-    gap: 2.4rem
+    max-width: 54rem
+    padding: 4.8rem 3.2rem
+    @include flex-container(column, flex-start, flex-start)
+    gap: 3.2rem
 
     @include mq(tablet)
-      right: 4rem
-      top: 15rem
+      width: 54rem
+      padding: 4.8rem
 
-    @include mq($key: desktop)
-      right: 15rem
-      top: 10rem
+    .confirmation-icon
+      svg
+        width: 6.4rem
+        height: 6.4rem
+
+    .confirmation-text
+      @include flex-container(column, flex-start, flex-start)
+      gap: 1.6rem
+
+      h2
+        color: $black
+        margin: 0
+        line-height: 1
+
+      p
+        color: rgba(0,0,0,0.5)
+        margin: 0
+
+    .order-summary
+      width: 100%
+      border-radius: 0.8rem
+      overflow: hidden
+      @include flex-container(row, stretch, stretch)
+
+      @include mq(tablet)
+        @include flex-container(row, stretch, stretch)
+
+      .order-items
+        background: $light-grey
+        padding: 2.4rem
+        @include flex-container(column, flex-start, flex-start)
+        gap: 1.6rem
+        flex: 1
+
+        .order-item
+          @include flex-container(row, center, space-between)
+          width: 100%
+          gap: 1.6rem
+
+          .item-image
+            width: 5rem
+            height: 5rem
+            object-fit: cover
+            border-radius: 0.8rem
+
+          .item-details
+            @include flex-container(column, flex-start, flex-start)
+            flex: 1
+            gap: 0.4rem
+
+            .item-name
+              font-weight: bold
+              color: $black
+
+            .item-price
+              color: rgba(0,0,0,0.5)
+
+          .item-quantity
+            color: rgba(0,0,0,0.5)
+            font-weight: bold
+
+        .remaining-items,
+        .show-less
+          background: none
+          border: none
+          padding: 1.2rem 0
+          width: 100%
+          text-align: center
+          border-top: 1px solid rgba(0,0,0,0.08)
+          cursor: pointer
+          transition: background-color 0.3s ease
+
+          &:hover
+            background-color: rgba(0,0,0,0.04)
+
+          span
+            color: rgba(0,0,0,0.5)
+            font-weight: bold
+
+      .grand-total
+        background: $black
+        padding: 2.4rem
+        @include flex-container(column, center, center)
+        gap: 0.8rem
+        min-width: 19.8rem
+
+        .total-label
+          color: rgba(255,255,255,0.5)
+          text-transform: uppercase
+
+        .total-amount
+          color: $white
+
+    .back-home-btn
+      width: 100%
+      background: $primary-orange
+      color: $white
+      border: none
+      padding: 1.5rem 3rem
+      border-radius: 0
+      cursor: pointer
+      transition: background-color 0.3s ease
+      text-transform: uppercase
+      letter-spacing: 1px
+
+      &:hover
+        background: $primary-peach
+
+      &:focus
+        outline: 2px solid $primary-orange
+        outline-offset: 2px
