@@ -1,6 +1,7 @@
 import { Component, inject, computed, signal } from '@angular/core';
 import { AuthInput } from '../../shared/components/auth-input/auth-input';
 import { Footer } from '../../shared/components/footer/footer';
+import { ConfirmCheckout } from '../../shared/components/confirm-checkout/confirm-checkout';
 import {
   FormBuilder,
   FormGroup,
@@ -13,7 +14,13 @@ import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-checkout-page',
-  imports: [AuthInput, Footer, ReactiveFormsModule, CommonModule],
+  imports: [
+    AuthInput,
+    Footer,
+    ConfirmCheckout,
+    ReactiveFormsModule,
+    CommonModule,
+  ],
   templateUrl: './checkout-page.html',
   styleUrl: './checkout-page.sass',
 })
@@ -53,6 +60,9 @@ export class CheckoutPage {
   shipping = signal(50); // Flat shipping for demo, adjust as needed
   vat = computed(() => this.calculateVAT(this.cartTotal()));
   grandTotal = computed(() => this.cartTotal() + this.shipping() + this.vat());
+
+  // Modal state
+  showConfirmModal = signal(false);
 
   calculateVAT(amount: number): number {
     return Math.round(amount * 0.2);
@@ -96,5 +106,11 @@ export class CheckoutPage {
     }
 
     console.log(this.checkoutForm.value);
+    // Show confirmation modal
+    this.showConfirmModal.set(true);
+  }
+
+  closeConfirmModal() {
+    this.showConfirmModal.set(false);
   }
 }
