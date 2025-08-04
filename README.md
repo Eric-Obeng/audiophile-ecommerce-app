@@ -1,5 +1,8 @@
 # Audiophile E-commerce App
 
+## For a full documentation of the project, click on the link bellow
+[Documentation](https://deepwiki.com/Eric-Obeng/audiophile-ecommerce-app)
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
 
 ## Project Overview
